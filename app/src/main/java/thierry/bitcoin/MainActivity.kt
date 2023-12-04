@@ -13,7 +13,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
-import thierry.bitcoin.getbitcoinpriceusecase.model.BitcoinPrice
 import thierry.bitcoin.ui.theme.BitcoinTheme
 
 @AndroidEntryPoint

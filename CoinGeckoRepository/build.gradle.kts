@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -10,7 +11,7 @@ android {
     compileSdk = 33
 
     defaultConfig {
-       // applicationId = "thierry.bitcoin.coingeckorepository"
+        // applicationId = "thierry.bitcoin.coingeckorepository"
         minSdk = 24
         targetSdk = 33
         //
@@ -53,11 +54,9 @@ dependencies {
 
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-scalars:2.1.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 
-        //Kotlin Serialization
-    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
-    implementation ("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
-    implementation ("com.squareup.okhttp3:okhttp:4.12.0")
+    //Kotlin Serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
 }

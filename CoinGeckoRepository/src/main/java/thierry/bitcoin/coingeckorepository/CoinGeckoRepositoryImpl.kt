@@ -1,18 +1,17 @@
 package thierry.bitcoin.coingeckorepository
 
-import android.util.Log
+import thierry.bitcoin.getbitcoinpriceusecase.CoinGeckoRepository
 import thierry.bitcoin.getbitcoinpriceusecase.model.BitcoinPrice
-import thierry.bitcoin.getbitcoinpriceusecase.CoingeckoRepository
 import thierry.bitcoin.getbitcoinpriceusecase.model.CurrentPrice
 import javax.inject.Inject
+import thierry.bitcoin.getbitcoinpriceusecase.model.MarketData as MarketDataFromUc
 
-class CoingeckoRepositoryImpl @Inject constructor(
-    private val coingeckoService: CoingeckoService,
-): CoingeckoRepository {
-    override suspend fun getBitcoinPrice(): BitcoinPrice? {
+class CoinGeckoRepositoryImpl @Inject constructor(
+    private val coinGeckoService: CoingeckoService,
+) : CoinGeckoRepository {
+    override suspend fun getBitcoinPrice(): BitcoinPrice =
+        coinGeckoService.getCoinById("bitcoin").toBitcoinPrice()
 
-       return coingeckoService.getCoinById("bitcoin").toBitcoinPrice()
-    }
 
     // ResultOf ? better mapping with exception etc
 
@@ -28,5 +27,10 @@ fun BitcoinPriceResponse.toBitcoinPrice(): BitcoinPrice = BitcoinPrice(
     symbol = this.symbol,
 )
 
-fun MarketData.toMarketDataUc(): thierry.bitcoin.getbitcoinpriceusecase.model.MarketData =
-    thierry.bitcoin.getbitcoinpriceusecase.model.MarketData(CurrentPrice(eur = this.current_price.eur, usd = this.current_price.usd))
+fun MarketData.toMarketDataUc(): MarketDataFromUc =
+    MarketDataFromUc(
+        CurrentPrice(
+            eur = this.current_price.eur,
+            usd = this.current_price.usd
+        )
+    )

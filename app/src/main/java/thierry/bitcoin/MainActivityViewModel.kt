@@ -12,22 +12,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
-   private val getBitcoinPriceUseCase: GetBitcoinPriceUseCase,
-): ViewModel() {
+    private val getBitcoinPriceUseCase: GetBitcoinPriceUseCase,
+) : ViewModel() {
 
     private val _btcPrice = MutableStateFlow<BitcoinPrice?>(value = null)
-     val btcPrice = _btcPrice.asStateFlow()
+    val btcPrice = _btcPrice.asStateFlow()
 
     init {
         getBitcoinPrice()
     }
 
-   private fun getBitcoinPrice(): String? {
-        var t :  String? = null
+    private fun getBitcoinPrice() =
         viewModelScope.launch {
-            t = getBitcoinPriceUseCase.invoke()?.market_data?.current_price.toString()
             _btcPrice.emit(getBitcoinPriceUseCase())
         }
-        return t
-    }
 }

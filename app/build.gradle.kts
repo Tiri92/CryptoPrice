@@ -70,13 +70,12 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
 
-
     //Hilt
     implementation("com.google.dagger:hilt-android:2.48.1")
     kapt("com.google.dagger:hilt-compiler:2.48.1")
 
     implementation(project(mapOf("path" to ":GetBitcoinPriceUseCase")))
-    implementation(project(mapOf("path" to ":coingeckorepository")))
+    implementation(project(mapOf("path" to ":CoinGeckoRepository")))
 
-    implementation ("javax.inject:javax.inject:1")
+    implementation("javax.inject:javax.inject:1")
 }

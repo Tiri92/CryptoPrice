@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class BitcoinPriceResponse(
     @SerialName("id")
-    val id:String,
+    val id: String,
     @SerialName("market_data")
     val market_data: MarketData,
     @SerialName("name")
