@@ -1,9 +1,7 @@
 package thierry.bitcoin.coingeckorepository
 
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
-import thierry.bitcoin.getbitcoinpriceusecase.model.BitcoinPrice
 
 interface CoingeckoService {
 

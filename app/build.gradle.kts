@@ -74,7 +74,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.48.1")
     kapt("com.google.dagger:hilt-compiler:2.48.1")
 
-    implementation(project(mapOf("path" to ":GetBitcoinPriceUseCase")))
+    implementation(project(mapOf("path" to ":usecases:GetBitcoinPriceUseCase")))
     implementation(project(mapOf("path" to ":CoinGeckoRepository")))
 
     implementation("javax.inject:javax.inject:1")
