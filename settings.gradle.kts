@@ -15,5 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Bitcoin"
 include(":app")
-include(":CoinGeckoRepository")
+include(":repositories:CoinGeckoRepository")
 include(":usecases:GetBitcoinPriceUseCase")
