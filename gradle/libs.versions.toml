@@ -1,0 +1,70 @@
+[libraries]
+
+# Retrofit2
+retrofit = { module = "com.squareup.retrofit2:retrofit", version = "2.9.0" }
+
+# DaggerHiltAndroid
+dagger = { module = "com.google.dagger:hilt-android", version = "2.48.1" }
+
+# DagerHiltCompiler
+daggerCompiler = { module = "com.google.dagger:hilt-compiler", version = "2.48.1" }
+
+# KotlinSerializationJson
+kotlinSerializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.6.0" }
+
+# Retrofit Kotlin Serialization Converter
+retrofit2ConverterKotlinSerialization = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version = "1.0.0" }
+
+# Okhttp
+okhttp = { module = "com.squareup.okhttp3:okhttp", version = "4.12.0" }
+
+# JavaxInject
+javaxInject = { module = "javax.inject:javax.inject", version = "1" }
+
+# Junit
+junit = { module = "junit:junit", version = "4.13.2" }
+
+# AndroidMaterial
+materialDeisgn = { module = "com.google.android.material:material", version = "1.10.0" }
+
+# AndroidXCoreKtx
+androidXCoreKtx = { module = "androidx.core:core-ktx", version = "1.12.0" }
+
+# AndroidXAppCompat
+androidXAppCompat = { module = "androidx.appcompat:appcompat", version = "1.6.1" }
+
+# AndroidXTestJunit
+androidXTestJunit = { module = "androidx.test.ext:junit", version = "1.1.5" }
+
+# AndroidXTestEspressoCore
+androidXTestEspressoCore = { module = "androidx.test.espresso:espresso-core", version = "3.5.1" }
+
+# AndroidXLifecycleRuntimeKtx
+androidXLifecycleRuntimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version = "2.6.2" }
+
+# AndroidXActivityCompose
+activityCompose = { module = "androidx.activity:activity-compose", version = "1.8.1" }
+
+# AndroidXComposeBom
+composeBom = { module = "androidx.compose:compose-bom", version = "2023.10.01" }
+
+# AndroidXComposeUi
+composeUi = { module = "androidx.compose.ui:ui" }
+
+# AndroidXComposeUiGraphics
+composeUiGraphics = { module = "androidx.compose.ui:ui-graphics" }
+
+# AndroidXComposeUiToolingPreview
+composeUiToolingPreview = { module = "androidx.compose.ui:ui-tooling-preview" }
+
+# AndroidXComposeMaterial3
+composeMaterial3 = { module = "androidx.compose.material3:material3" }
+
+# AndroidXComposeUiTooling
+composeUiTooling = { module = "androidx.compose.ui:ui-tooling" }
+
+# AndroidXComposeUiTestManifest
+composeUiTestManifest = { module = "androidx.compose.ui:ui-test-manifest" }
+
+# AndroidXComposeUiTestJunit4
+composeUiTestJunit4 = { module = "androidx.compose.ui:ui-test-junit4" }

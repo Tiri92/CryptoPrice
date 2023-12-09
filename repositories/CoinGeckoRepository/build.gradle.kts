@@ -40,23 +40,21 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.10.0")
-    implementation(project(mapOf("path" to ":usecases:GetBitcoinPriceUseCase")))
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation(libs.androidXCoreKtx)
+    implementation(libs.androidXAppCompat)
+    implementation(libs.materialDeisgn)
+    implementation(project(":usecases:GetBitcoinPriceUseCase"))
+    implementation(project(":usecases:GetBitcoinPriceUseCase"))
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidXTestJunit)
+    androidTestImplementation(libs.androidXTestEspressoCore)
 
     //Hilt
-    implementation("com.google.dagger:hilt-android:2.48.1")
-    kapt("com.google.dagger:hilt-compiler:2.48.1")
-
-    //Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation(libs.dagger)
+    kapt(libs.daggerCompiler)
 
     //Kotlin Serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
-    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
-    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation(libs.kotlinSerializationJson)
+    implementation(libs.retrofit2ConverterKotlinSerialization)
+    implementation(libs.okhttp)
 }
