@@ -1,8 +1,8 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.dagger.hilt.android)
+    id(libs.plugins.kotlin.kapt.get().pluginId)
 }
 
 android {
@@ -42,7 +42,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = "1.5.2"
     }
     packaging {
         resources {
@@ -57,10 +57,11 @@ dependencies {
     implementation(libs.androidXLifecycleRuntimeKtx)
     implementation(libs.activityCompose)
     implementation(platform(libs.composeBom))
-    implementation(libs.composeUi)
+
+    implementation(libs.bundles.compose)
+
     implementation(libs.composeUiGraphics)
     implementation(libs.composeUiToolingPreview)
-    implementation(libs.composeMaterial3)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidXTestJunit)
     androidTestImplementation(libs.androidXTestEspressoCore)

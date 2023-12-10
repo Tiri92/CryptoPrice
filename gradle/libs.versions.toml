@@ -1,3 +1,33 @@
+[versions]
+
+androidGradlePlugin = "8.2.0"
+kotlinAndroidGradlePluign = "1.9.0"
+daggerHiltAndroidGradlePlugin = "2.48"
+kotlinJvmGradlePlugin = "1.8.10"
+kotlinPluginSerializationGradlePlugin = "1.6.0"
+
+[plugins]
+
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinAndroidGradlePluign" }
+
+dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "daggerHiltAndroidGradlePlugin" }
+
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinJvmGradlePlugin" }
+
+kotlin-plugin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinPluginSerializationGradlePlugin" }
+
+kotlin-kapt = { id = "kotlin-kapt" }
+
+java-library = { id = "java-library" }
+
+android-library = { id = "com.android.library" }
+
+[bundles]
+
+compose = ["composeUi", "composeMaterial3"]
+
 [libraries]
 
 # Retrofit2
