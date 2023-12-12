@@ -1,9 +1,7 @@
 plugins {
-    //alias(libs.plugins.android.application)
-    //alias(libs.plugins.kotlin.android)
     alias(libs.plugins.dagger.hilt.android)
+    id(libs.plugins.thierry.android.application.get().pluginId)
     id(libs.plugins.kotlin.kapt.get().pluginId)
-    id("thierry.android.application")
 }
 
 android {

@@ -1,4 +1,5 @@
 [versions]
+#TODO Clean dependencies BuildGradle, Clean .toml with versions of lib, rename custom lib, rename project and packages and app id
 
 androidGradlePlugin = "8.2.0"
 kotlinAndroidGradlePluign = "1.9.0"
@@ -8,23 +9,30 @@ kotlinPluginSerializationGradlePlugin = "1.6.0"
 
 kotlin = "1.9.0"
 
+compileSdk = "34"
+targetSdk = "34"
+minSdk = "24"
+kotlinCompilerExtensionVersion = "1.5.2"
+
 [plugins]
 
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinAndroidGradlePluign" }
 
-dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "daggerHiltAndroidGradlePlugin" }
-
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinJvmGradlePlugin" }
-
-kotlin-plugin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinPluginSerializationGradlePlugin" }
 
 kotlin-kapt = { id = "kotlin-kapt" }
 
 java-library = { id = "java-library" }
 
-android-library = { id = "com.android.library" }
+thierry-android-library = { id = "thierry.android.library" }
+thierry-android-application = { id = "thierry.android.application" }
+thierry-jvm-library = { id = "thierry.jvm.library" }
+
+dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "daggerHiltAndroidGradlePlugin" }
+
+kotlin-plugin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinPluginSerializationGradlePlugin" }
 
 [bundles]
 
