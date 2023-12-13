@@ -33,5 +33,9 @@ gradlePlugin {
             id = "thierry.jvm.library"
             implementationClass = "JvmLibraryConventionPlugin"
         }
+        register("hiltAndroid") {
+            id = "thierry.hilt.android"
+            implementationClass = "HiltConventionPlugin"
+        }
     }
 }

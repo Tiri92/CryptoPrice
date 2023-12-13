@@ -1,8 +1,7 @@
 plugins {
-    alias(libs.plugins.dagger.hilt.android)
     alias(libs.plugins.kotlin.plugin.serialization)
     id(libs.plugins.thierry.android.library.get().pluginId)
-    id(libs.plugins.kotlin.kapt.get().pluginId)
+    id(libs.plugins.thierry.hilt.android.get().pluginId)
 }
 
 android {

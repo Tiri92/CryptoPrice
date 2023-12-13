@@ -29,6 +29,7 @@ java-library = { id = "java-library" }
 thierry-android-library = { id = "thierry.android.library" }
 thierry-android-application = { id = "thierry.android.application" }
 thierry-jvm-library = { id = "thierry.jvm.library" }
+thierry-hilt-android = { id = "thierry.hilt.android" }
 
 dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "daggerHiltAndroidGradlePlugin" }
 
