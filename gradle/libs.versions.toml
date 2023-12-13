@@ -1,39 +1,45 @@
 [versions]
-#TODO Clean dependencies BuildGradle, Clean .toml with versions of lib, rename custom lib, rename project and packages and app id
 
 androidGradlePlugin = "8.2.0"
-kotlinAndroidGradlePluign = "1.9.0"
 daggerHiltAndroidGradlePlugin = "2.48"
+kotlinAndroidGradlePluign = "1.9.0"
 kotlinJvmGradlePlugin = "1.8.10"
 kotlinPluginSerializationGradlePlugin = "1.6.0"
 
-kotlin = "1.9.0"
-
 compileSdk = "34"
-targetSdk = "34"
-minSdk = "24"
 kotlinCompilerExtensionVersion = "1.5.2"
+minSdk = "24"
+targetSdk = "34"
+
+activityCompose = "1.8.1"
+androidXAppCompat = "1.6.1"
+androidXCoreKtx = "1.12.0"
+androidXLifecycleRuntimeKtx = "2.6.2"
+androidXTestEspressoCore = "3.5.1"
+androidXTestJunit = "1.1.5"
+composeBom = "2023.10.01"
+hilt = "2.48.1"
+javaxInject = "1"
+junit = "4.13.2"
+kotlinSerialization = "1.6.0"
+kotlinSerializationConverter = "1.0.0"
+materialDesign = "1.10.0"
+okhttp = "4.12.0"
+retrofit = "2.9.0"
 
 [plugins]
 
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
-
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinAndroidGradlePluign" }
-
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinJvmGradlePlugin" }
-
-kotlin-kapt = { id = "kotlin-kapt" }
-
-java-library = { id = "java-library" }
-
-thierry-android-library = { id = "thierry.android.library" }
-thierry-android-application = { id = "thierry.android.application" }
-thierry-jvm-library = { id = "thierry.jvm.library" }
-thierry-hilt-android = { id = "thierry.hilt.android" }
-
 dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "daggerHiltAndroidGradlePlugin" }
-
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinAndroidGradlePluign" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinJvmGradlePlugin" }
 kotlin-plugin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinPluginSerializationGradlePlugin" }
+
+# Custom Plugin
+thierry-android-application = { id = "thierry.android.application" }
+thierry-android-library = { id = "thierry.android.library" }
+thierry-hilt-android = { id = "thierry.hilt.android" }
+thierry-jvm-library = { id = "thierry.jvm.library" }
 
 [bundles]
 
@@ -41,56 +47,56 @@ compose = ["composeUi", "composeMaterial3"]
 
 [libraries]
 
-android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
-kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
-
-# Retrofit2
-retrofit = { module = "com.squareup.retrofit2:retrofit", version = "2.9.0" }
-
-# DaggerHiltAndroid
-dagger = { module = "com.google.dagger:hilt-android", version = "2.48.1" }
-
-# DagerHiltCompiler
-daggerCompiler = { module = "com.google.dagger:hilt-compiler", version = "2.48.1" }
-
-# KotlinSerializationJson
-kotlinSerializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.6.0" }
-
-# Retrofit Kotlin Serialization Converter
-retrofit2ConverterKotlinSerialization = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version = "1.0.0" }
-
-# Okhttp
-okhttp = { module = "com.squareup.okhttp3:okhttp", version = "4.12.0" }
-
-# JavaxInject
-javaxInject = { module = "javax.inject:javax.inject", version = "1" }
-
-# Junit
-junit = { module = "junit:junit", version = "4.13.2" }
-
-# AndroidMaterial
-materialDeisgn = { module = "com.google.android.material:material", version = "1.10.0" }
-
-# AndroidXCoreKtx
-androidXCoreKtx = { module = "androidx.core:core-ktx", version = "1.12.0" }
+# AndroidXActivityCompose
+activityCompose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 
 # AndroidXAppCompat
-androidXAppCompat = { module = "androidx.appcompat:appcompat", version = "1.6.1" }
+androidXAppCompat = { module = "androidx.appcompat:appcompat", version.ref = "androidXAppCompat" }
 
-# AndroidXTestJunit
-androidXTestJunit = { module = "androidx.test.ext:junit", version = "1.1.5" }
-
-# AndroidXTestEspressoCore
-androidXTestEspressoCore = { module = "androidx.test.espresso:espresso-core", version = "3.5.1" }
+# AndroidXCoreKtx
+androidXCoreKtx = { module = "androidx.core:core-ktx", version.ref = "androidXCoreKtx" }
 
 # AndroidXLifecycleRuntimeKtx
-androidXLifecycleRuntimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version = "2.6.2" }
+androidXLifecycleRuntimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidXLifecycleRuntimeKtx" }
 
-# AndroidXActivityCompose
-activityCompose = { module = "androidx.activity:activity-compose", version = "1.8.1" }
+# AndroidXTestEspressoCore
+androidXTestEspressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "androidXTestEspressoCore" }
+
+# AndroidXTestJunit
+androidXTestJunit = { module = "androidx.test.ext:junit", version.ref = "androidXTestJunit" }
 
 # AndroidXComposeBom
-composeBom = { module = "androidx.compose:compose-bom", version = "2023.10.01" }
+composeBom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+
+# DaggerHiltAndroid
+dagger = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+
+# DagerHiltCompiler
+daggerCompiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+
+# JavaxInject
+javaxInject = { module = "javax.inject:javax.inject", version.ref = "javaxInject" }
+
+# Junit
+junit = { module = "junit:junit", version.ref = "junit" }
+
+# KotlinSerializationJson
+kotlinSerializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinSerialization" }
+
+# Retrofit Kotlin Serialization Converter
+retrofit2ConverterKotlinSerialization = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "kotlinSerializationConverter" }
+
+# AndroidMaterial
+materialDeisgn = { module = "com.google.android.material:material", version.ref = "materialDesign" }
+
+# Okhttp
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+
+# Retrofit2
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+
+# AndroidXComposeMaterial3
+composeMaterial3 = { module = "androidx.compose.material3:material3" }
 
 # AndroidXComposeUi
 composeUi = { module = "androidx.compose.ui:ui" }
@@ -98,17 +104,18 @@ composeUi = { module = "androidx.compose.ui:ui" }
 # AndroidXComposeUiGraphics
 composeUiGraphics = { module = "androidx.compose.ui:ui-graphics" }
 
-# AndroidXComposeUiToolingPreview
-composeUiToolingPreview = { module = "androidx.compose.ui:ui-tooling-preview" }
-
-# AndroidXComposeMaterial3
-composeMaterial3 = { module = "androidx.compose.material3:material3" }
-
-# AndroidXComposeUiTooling
-composeUiTooling = { module = "androidx.compose.ui:ui-tooling" }
+# AndroidXComposeUiTestJunit4
+composeUiTestJunit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 
 # AndroidXComposeUiTestManifest
 composeUiTestManifest = { module = "androidx.compose.ui:ui-test-manifest" }
 
-# AndroidXComposeUiTestJunit4
-composeUiTestJunit4 = { module = "androidx.compose.ui:ui-test-junit4" }
+# AndroidXComposeUiTooling
+composeUiTooling = { module = "androidx.compose.ui:ui-tooling" }
+
+# AndroidXComposeUiToolingPreview
+composeUiToolingPreview = { module = "androidx.compose.ui:ui-tooling-preview" }
+
+# Plugin Region
+android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
+kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlinAndroidGradlePluign" }
