@@ -8,6 +8,7 @@ android {
 }
 
 dependencies {
+    //TODO Clean dependencies here
 
     implementation(libs.androidXCoreKtx)
     implementation(libs.androidXLifecycleRuntimeKtx)

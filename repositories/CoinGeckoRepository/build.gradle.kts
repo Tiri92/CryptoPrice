@@ -9,15 +9,8 @@ android {
 }
 
 dependencies {
-
-    implementation(libs.androidXCoreKtx)
-    implementation(libs.androidXAppCompat)
-    implementation(libs.materialDeisgn)
     implementation(project(":usecases:GetBitcoinPriceUseCase"))
     implementation(project(":usecases:GetBitcoinPriceUseCase"))
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidXTestJunit)
-    androidTestImplementation(libs.androidXTestEspressoCore)
 
     //Hilt
     implementation(libs.dagger)
@@ -27,4 +20,8 @@ dependencies {
     implementation(libs.kotlinSerializationJson)
     implementation(libs.retrofit2ConverterKotlinSerialization)
     implementation(libs.okhttp)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidXTestJunit)
+    androidTestImplementation(libs.androidXTestEspressoCore)
 }
