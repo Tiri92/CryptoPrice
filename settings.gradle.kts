@@ -14,7 +14,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Bitcoin"
+rootProject.name = "CryptoPrice"
 include(":app")
 include(":repositories:CoinGeckoRepository")
 include(":usecases:GetBitcoinPriceUseCase")

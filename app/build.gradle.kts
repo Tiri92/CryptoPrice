@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "thierry.bitcoin"
+    namespace = "thierry.cryptoprice"
 }
 
 dependencies {

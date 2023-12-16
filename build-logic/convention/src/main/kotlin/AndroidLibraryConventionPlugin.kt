@@ -2,8 +2,8 @@ import com.android.build.gradle.LibraryExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
-import thierry.bitcoin.configureKotlinAndroid
-import thierry.bitcoin.libs
+import thierry.cryptoprice.configureKotlinAndroid
+import thierry.cryptoprice.libs
 
 class AndroidLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {

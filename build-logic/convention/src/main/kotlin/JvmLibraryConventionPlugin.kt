@@ -1,6 +1,6 @@
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import thierry.bitcoin.configureKotlinJvm
+import thierry.cryptoprice.configureKotlinJvm
 
 class JvmLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
