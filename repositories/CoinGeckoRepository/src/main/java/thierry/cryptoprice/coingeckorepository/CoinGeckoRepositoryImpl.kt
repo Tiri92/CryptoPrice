@@ -1,5 +1,6 @@
 package thierry.cryptoprice.coingeckorepository
 
+import thierry.cryptoprice.coingeckorepository.mapper.toCryptoPriceException
 import thierry.cryptoprice.getbitcoinpriceusecase.CoinGeckoRepository
 import thierry.cryptoprice.getbitcoinpriceusecase.model.BitcoinPrice
 import thierry.cryptoprice.getbitcoinpriceusecase.model.CryptoPriceException

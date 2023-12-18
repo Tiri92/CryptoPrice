@@ -4,6 +4,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 import retrofit2.HttpException
 import retrofit2.Response
+import thierry.cryptoprice.coingeckorepository.mapper.toCryptoPriceException
 import thierry.cryptoprice.getbitcoinpriceusecase.model.CryptoPriceException
 import thierry.cryptoprice.resultof.HttpStatusCode
 import thierry.cryptoprice.resultof.entity.ApiCallFailure

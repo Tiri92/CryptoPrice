@@ -1,4 +1,4 @@
-package thierry.cryptoprice.coingeckorepository
+package thierry.cryptoprice.coingeckorepository.mapper
 
 import thierry.cryptoprice.getbitcoinpriceusecase.model.CryptoPriceException
 import thierry.cryptoprice.resultof.HttpStatusCode
