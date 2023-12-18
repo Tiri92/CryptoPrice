@@ -1,4 +1,4 @@
-package thierry.cryptoprice.coingeckorepository
+package thierry.cryptoprice.getbitcoinpriceusecase
 
 import org.junit.Test
 

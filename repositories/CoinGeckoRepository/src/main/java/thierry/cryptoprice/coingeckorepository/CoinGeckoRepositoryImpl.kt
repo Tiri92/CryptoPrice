@@ -2,36 +2,36 @@ package thierry.cryptoprice.coingeckorepository
 
 import thierry.cryptoprice.getbitcoinpriceusecase.CoinGeckoRepository
 import thierry.cryptoprice.getbitcoinpriceusecase.model.BitcoinPrice
+import thierry.cryptoprice.getbitcoinpriceusecase.model.CryptoPriceException
 import thierry.cryptoprice.getbitcoinpriceusecase.model.CurrentPrice
 import thierry.cryptoprice.resultof.ResultOf
 import thierry.cryptoprice.resultof.apiCall
-import thierry.cryptoprice.resultof.entity.ApiCallFailure
 import thierry.cryptoprice.resultof.mapFailure
 import thierry.cryptoprice.resultof.mapSuccess
 import javax.inject.Inject
 import thierry.cryptoprice.getbitcoinpriceusecase.model.MarketData as MarketDataFromUc
 
-class CoinGeckoRepositoryImpl @Inject constructor(
+class CoinGeckoRepositoryImpl @Inject constructor( //TODO Add test
     private val coinGeckoService: CoingeckoService,
 ) : CoinGeckoRepository {
-    override suspend fun getBitcoinPrice(): ResultOf<BitcoinPrice, ApiCallFailure> =
+    override suspend fun getBitcoinPrice(): ResultOf<BitcoinPrice, CryptoPriceException> =
         apiCall {
             coinGeckoService.getCoinById("bitcoin")
         }.mapSuccess {
             it.toBitcoinPrice()
         }.mapFailure {
-            it // TODO map the exception here
+            it.toCryptoPriceException()
         }
 }
 
-fun BitcoinPriceResponse.toBitcoinPrice(): BitcoinPrice = BitcoinPrice(
+internal fun BitcoinPriceResponse.toBitcoinPrice(): BitcoinPrice = BitcoinPrice(
     id = this.id,
     market_data = this.market_data.toMarketDataUc(),
     name = this.name,
     symbol = this.symbol,
 )
 
-fun MarketData.toMarketDataUc(): MarketDataFromUc =
+internal fun MarketData.toMarketDataUc(): MarketDataFromUc =
     MarketDataFromUc(
         CurrentPrice(
             eur = this.current_price.eur,

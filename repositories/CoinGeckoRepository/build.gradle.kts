@@ -10,7 +10,6 @@ android {
 
 dependencies {
     implementation(project(":usecases:GetBitcoinPriceUseCase"))
-    implementation(project(":usecases:GetBitcoinPriceUseCase"))
     implementation(project(":libraries:ResultOf"))
 
     //Hilt
