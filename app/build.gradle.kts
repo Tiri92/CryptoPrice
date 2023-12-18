@@ -31,8 +31,9 @@ dependencies {
     implementation(libs.dagger)
     kapt(libs.daggerCompiler)
 
-    implementation(project(mapOf("path" to ":usecases:GetBitcoinPriceUseCase")))
-    implementation(project(mapOf("path" to ":repositories:CoinGeckoRepository")))
+    implementation(project(":usecases:GetBitcoinPriceUseCase"))
+    implementation(project(":repositories:CoinGeckoRepository"))
+    implementation(project(":libraries:ResultOf"))
 
     implementation(libs.javaxInject)
 }

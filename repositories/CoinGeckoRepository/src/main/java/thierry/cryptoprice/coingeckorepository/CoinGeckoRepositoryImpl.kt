@@ -3,21 +3,25 @@ package thierry.cryptoprice.coingeckorepository
 import thierry.cryptoprice.getbitcoinpriceusecase.CoinGeckoRepository
 import thierry.cryptoprice.getbitcoinpriceusecase.model.BitcoinPrice
 import thierry.cryptoprice.getbitcoinpriceusecase.model.CurrentPrice
+import thierry.cryptoprice.resultof.ResultOf
+import thierry.cryptoprice.resultof.apiCall
+import thierry.cryptoprice.resultof.entity.ApiCallFailure
+import thierry.cryptoprice.resultof.mapFailure
+import thierry.cryptoprice.resultof.mapSuccess
 import javax.inject.Inject
 import thierry.cryptoprice.getbitcoinpriceusecase.model.MarketData as MarketDataFromUc
 
 class CoinGeckoRepositoryImpl @Inject constructor(
     private val coinGeckoService: CoingeckoService,
 ) : CoinGeckoRepository {
-    override suspend fun getBitcoinPrice(): BitcoinPrice =
-        coinGeckoService.getCoinById("bitcoin").toBitcoinPrice()
-
-
-    // ResultOf ? better mapping with exception etc
-
-    // Dependency Inversion with UseCase module wich contain the model return by the repo and the repo interface
-    // so model return by api must be different than model return by repo to usecase, each layer have his own model
-
+    override suspend fun getBitcoinPrice(): ResultOf<BitcoinPrice, ApiCallFailure> =
+        apiCall {
+            coinGeckoService.getCoinById("bitcoin")
+        }.mapSuccess {
+            it.toBitcoinPrice()
+        }.mapFailure {
+            it // TODO map the exception here
+        }
 }
 
 fun BitcoinPriceResponse.toBitcoinPrice(): BitcoinPrice = BitcoinPrice(

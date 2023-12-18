@@ -11,7 +11,7 @@ kotlinCompilerExtensionVersion = "1.5.2"
 minSdk = "24"
 targetSdk = "34"
 
-activityCompose = "1.8.1"
+activityCompose = "1.8.2"
 androidXAppCompat = "1.6.1"
 androidXCoreKtx = "1.12.0"
 androidXLifecycleRuntimeKtx = "2.6.2"
@@ -23,7 +23,8 @@ javaxInject = "1"
 junit = "4.13.2"
 kotlinSerialization = "1.6.0"
 kotlinSerializationConverter = "1.0.0"
-materialDesign = "1.10.0"
+materialDesign = "1.11.0"
+mockk = "1.13.8"
 okhttp = "4.12.0"
 retrofit = "2.9.0"
 
@@ -83,11 +84,14 @@ junit = { module = "junit:junit", version.ref = "junit" }
 # KotlinSerializationJson
 kotlinSerializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinSerialization" }
 
-# Retrofit Kotlin Serialization Converter
-retrofit2ConverterKotlinSerialization = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "kotlinSerializationConverter" }
-
 # AndroidMaterial
 materialDeisgn = { module = "com.google.android.material:material", version.ref = "materialDesign" }
+
+# Mockk
+mockkJvm = { module = "io.mockk:mockk-jvm", version.ref = "mockk" }
+
+# Retrofit Kotlin Serialization Converter
+retrofit2ConverterKotlinSerialization = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "kotlinSerializationConverter" }
 
 # Okhttp
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }

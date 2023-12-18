@@ -4,4 +4,5 @@ plugins {
 
 dependencies {
     implementation(libs.javaxInject)
+    implementation(project(":libraries:ResultOf"))
 }

@@ -8,6 +8,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import thierry.cryptoprice.getbitcoinpriceusecase.GetBitcoinPriceUseCase
 import thierry.cryptoprice.getbitcoinpriceusecase.model.BitcoinPrice
+import thierry.cryptoprice.resultof.mapFailure
+import thierry.cryptoprice.resultof.mapSuccess
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,6 +26,10 @@ class MainActivityViewModel @Inject constructor(
 
     private fun getBitcoinPrice() =
         viewModelScope.launch {
-            _btcPrice.emit(getBitcoinPriceUseCase())
+            getBitcoinPriceUseCase().mapSuccess {
+                _btcPrice.emit(it)
+            }.mapFailure {
+                //TODO handle error here
+            }
         }
 }
