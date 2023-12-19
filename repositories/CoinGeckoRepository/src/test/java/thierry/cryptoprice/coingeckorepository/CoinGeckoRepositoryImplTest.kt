@@ -3,6 +3,7 @@ package thierry.cryptoprice.coingeckorepository
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import thierry.cryptoprice.coingeckorepository.fake.FakeCoinGeckoService
+import thierry.cryptoprice.coingeckorepository.random.nextBitcoinPriceResponse
 import kotlin.random.Random
 import kotlin.test.assertTrue
 
@@ -40,15 +41,3 @@ class CoinGeckoRepositoryImplTest {
         assertTrue(result.isFailure)
     }
 }
-
-private fun Random.nextBitcoinPriceResponse() = BitcoinPriceResponse(
-    id = "",
-    market_data = MarketData(
-        current_price =
-        CurrentPrice(
-            eur = 1.0,
-            usd = 1.0
-        )
-    ),
-    name = "", symbol = "",
-)
