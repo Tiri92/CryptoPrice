@@ -3,7 +3,11 @@ plugins {
 }
 
 dependencies {
-    implementation(libs.javaxInject)
-    testImplementation(libs.junit)
     implementation(project(":libraries:ResultOf"))
+
+    implementation(libs.javaxInject)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlinTest)
+    testImplementation(libs.kotlinXCouroutinesTestJvm)
 }

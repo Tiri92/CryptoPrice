@@ -1,4 +1,4 @@
-package thierry.cryptoprice.coingeckorepository
+package thierry.cryptoprice.coingeckorepository.mapper
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

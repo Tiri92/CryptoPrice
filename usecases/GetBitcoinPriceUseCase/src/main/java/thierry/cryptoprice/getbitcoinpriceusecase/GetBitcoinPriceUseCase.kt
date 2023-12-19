@@ -8,6 +8,6 @@ import javax.inject.Inject
 class GetBitcoinPriceUseCase @Inject constructor(
     private val coinGeckoRepository: CoinGeckoRepository,
 ) {
-    suspend operator fun invoke(): ResultOf<BitcoinPrice, CryptoPriceException> = //TODO Add test
+    suspend operator fun invoke(): ResultOf<BitcoinPrice, CryptoPriceException> =
         coinGeckoRepository.getBitcoinPrice()
 }
