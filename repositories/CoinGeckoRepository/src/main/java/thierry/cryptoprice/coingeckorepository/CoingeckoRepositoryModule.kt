@@ -28,12 +28,12 @@ internal interface CoinGeckoRepositoryModule {
         @Provides
         fun provideCoinGeckoApiService(
             json: Json,
-        ): CoingeckoService {
+        ): CoinGeckoService {
             return Retrofit.Builder()
                 .baseUrl("https://api.coingecko.com/")
                 .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
                 .build()
-                .create(CoingeckoService::class.java)
+                .create(CoinGeckoService::class.java)
         }
     }
 }

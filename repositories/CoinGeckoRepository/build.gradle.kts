@@ -22,6 +22,7 @@ dependencies {
     implementation(libs.okhttp)
 
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidXTestJunit)
-    androidTestImplementation(libs.androidXTestEspressoCore)
+    testImplementation(libs.kotlinTest)
+    testImplementation(libs.kotlinXCouroutinesTestJvm)
+    testImplementation(libs.mockkJvm)
 }

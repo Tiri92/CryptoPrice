@@ -21,6 +21,8 @@ composeBom = "2023.10.01"
 hilt = "2.48.1"
 javaxInject = "1"
 junit = "4.13.2"
+kotlinTest = "1.9.20"
+kotlinXCouroutinesTest = "1.7.3"
 kotlinSerialization = "1.6.0"
 kotlinSerializationConverter = "1.0.0"
 materialDesign = "1.11.0"
@@ -81,6 +83,12 @@ javaxInject = { module = "javax.inject:javax.inject", version.ref = "javaxInject
 # Junit
 junit = { module = "junit:junit", version.ref = "junit" }
 
+# KotlinTest
+kotlinTest = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlinTest" }
+
+# KotlinXCouroutinesTestJvm
+kotlinXCouroutinesTestJvm = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test-jvm", version.ref = "kotlinXCouroutinesTest" }
+
 # KotlinSerializationJson
 kotlinSerializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinSerialization" }
 
@@ -90,7 +98,7 @@ materialDeisgn = { module = "com.google.android.material:material", version.ref 
 # Mockk
 mockkJvm = { module = "io.mockk:mockk-jvm", version.ref = "mockk" }
 
-# Retrofit Kotlin Serialization Converter
+# RetrofitKotlinSerializationConverter
 retrofit2ConverterKotlinSerialization = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "kotlinSerializationConverter" }
 
 # Okhttp

@@ -12,8 +12,8 @@ import thierry.cryptoprice.resultof.mapSuccess
 import javax.inject.Inject
 import thierry.cryptoprice.getbitcoinpriceusecase.model.MarketData as MarketDataFromUc
 
-class CoinGeckoRepositoryImpl @Inject constructor( //TODO Add test
-    private val coinGeckoService: CoingeckoService,
+class CoinGeckoRepositoryImpl @Inject constructor(
+    private val coinGeckoService: CoinGeckoService,
 ) : CoinGeckoRepository {
     override suspend fun getBitcoinPrice(): ResultOf<BitcoinPrice, CryptoPriceException> =
         apiCall {
