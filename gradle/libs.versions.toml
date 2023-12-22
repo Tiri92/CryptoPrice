@@ -14,6 +14,8 @@ targetSdk = "34"
 activityCompose = "1.8.2"
 androidXAppCompat = "1.6.1"
 androidXCoreKtx = "1.12.0"
+androidXHiltNavigationCompose = "1.1.0"
+androidXLifecycleRuntimeCompose = "2.6.2"
 androidXLifecycleRuntimeKtx = "2.6.2"
 androidXTestEspressoCore = "3.5.1"
 androidXTestJunit = "1.1.5"
@@ -28,6 +30,7 @@ kotlinSerializationConverter = "1.0.0"
 materialDesign = "1.11.0"
 mockk = "1.13.8"
 okhttp = "4.12.0"
+parcelize = "1.9.20"
 retrofit = "2.9.0"
 
 [plugins]
@@ -43,6 +46,7 @@ thierry-android-application = { id = "thierry.android.application" }
 thierry-android-library = { id = "thierry.android.library" }
 thierry-hilt-android = { id = "thierry.hilt.android" }
 thierry-jvm-library = { id = "thierry.jvm.library" }
+thierry-kotlin-parcelize = { id = "thierry.kotlin.parcelize" }
 
 [bundles]
 
@@ -58,6 +62,12 @@ androidXAppCompat = { module = "androidx.appcompat:appcompat", version.ref = "an
 
 # AndroidXCoreKtx
 androidXCoreKtx = { module = "androidx.core:core-ktx", version.ref = "androidXCoreKtx" }
+
+# AndroidXHiltNavigationCompose
+androidXHiltNavigationCompose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "androidXHiltNavigationCompose" }
+
+# AndroidXLifecycleRuntimeCompose
+androidXLifecycleRuntimeCompose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidXLifecycleRuntimeCompose" }
 
 # AndroidXLifecycleRuntimeKtx
 androidXLifecycleRuntimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidXLifecycleRuntimeKtx" }
@@ -97,6 +107,9 @@ materialDeisgn = { module = "com.google.android.material:material", version.ref 
 
 # Mockk
 mockkJvm = { module = "io.mockk:mockk-jvm", version.ref = "mockk" }
+
+# Parcelize
+parcelize = { module = "org.jetbrains.kotlin:kotlin-parcelize-runtime", version.ref = "parcelize" }
 
 # RetrofitKotlinSerializationConverter
 retrofit2ConverterKotlinSerialization = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "kotlinSerializationConverter" }

@@ -1,6 +1,7 @@
 plugins {
     id(libs.plugins.thierry.android.application.get().pluginId)
     id(libs.plugins.thierry.hilt.android.get().pluginId)
+    id(libs.plugins.thierry.kotlin.parcelize.get().pluginId)
 }
 
 android {
@@ -12,6 +13,7 @@ dependencies {
 
     implementation(libs.androidXCoreKtx)
     implementation(libs.androidXLifecycleRuntimeKtx)
+    implementation(libs.androidXLifecycleRuntimeCompose)
     implementation(libs.activityCompose)
     implementation(platform(libs.composeBom))
 
@@ -28,6 +30,7 @@ dependencies {
 
 
     //Hilt
+    implementation(libs.androidXHiltNavigationCompose)
     implementation(libs.dagger)
     kapt(libs.daggerCompiler)
 

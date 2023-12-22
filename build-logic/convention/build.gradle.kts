@@ -37,5 +37,9 @@ gradlePlugin {
             id = "thierry.hilt.android"
             implementationClass = "HiltConventionPlugin"
         }
+        register("kotlinParcelize") {
+            id = "thierry.kotlin.parcelize"
+            implementationClass = "KotlinParcelizeConventionPlugin"
+        }
     }
 }

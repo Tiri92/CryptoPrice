@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CryptoPrice</string>
+    <string name="error_occurred">Sorry, an error occurred</string>
+    <string name="retry">Retry</string>
 </resources>
