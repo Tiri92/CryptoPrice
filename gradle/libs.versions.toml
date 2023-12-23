@@ -47,6 +47,7 @@ thierry-android-library = { id = "thierry.android.library" }
 thierry-hilt-android = { id = "thierry.hilt.android" }
 thierry-jvm-library = { id = "thierry.jvm.library" }
 thierry-kotlin-parcelize = { id = "thierry.kotlin.parcelize" }
+thierry-hilt-jvm = { id = "thierry.hilt.jvm" }
 
 [bundles]
 
@@ -81,11 +82,14 @@ androidXTestJunit = { module = "androidx.test.ext:junit", version.ref = "android
 # AndroidXComposeBom
 composeBom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
 
+# DaggerHilt
+hilt = { module = "com.google.dagger:hilt-core", version.ref = "hilt"}
+
 # DaggerHiltAndroid
-dagger = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hiltAndroid = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 
 # DagerHiltCompiler
-daggerCompiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+hiltCompiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 
 # JavaxInject
 javaxInject = { module = "javax.inject:javax.inject", version.ref = "javaxInject" }

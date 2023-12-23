@@ -1,20 +1,12 @@
 plugins {
     alias(libs.plugins.kotlin.plugin.serialization)
-    id(libs.plugins.thierry.android.library.get().pluginId)
-    id(libs.plugins.thierry.hilt.android.get().pluginId)
-}
-
-android {
-    namespace = "thierry.cryptoprice.coingeckorepository"
+    id(libs.plugins.thierry.jvm.library.get().pluginId)
+    id(libs.plugins.thierry.hilt.jvm.get().pluginId)
 }
 
 dependencies {
     implementation(project(":usecases:GetBitcoinPriceUseCase"))
     implementation(project(":libraries:ResultOf"))
-
-    //Hilt
-    implementation(libs.dagger)
-    kapt(libs.daggerCompiler)
 
     //Kotlin Serialization
     implementation(libs.kotlinSerializationJson)

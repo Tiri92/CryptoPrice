@@ -40,8 +40,8 @@ dependencies {
 
     //Hilt
     implementation(libs.androidXHiltNavigationCompose)
-    implementation(libs.dagger)
-    kapt(libs.daggerCompiler)
+    implementation(libs.hiltAndroid)
+    kapt(libs.hiltCompiler)
 
     implementation(libs.javaxInject)
 

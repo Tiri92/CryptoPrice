@@ -35,7 +35,11 @@ gradlePlugin {
         }
         register("hiltAndroid") {
             id = "thierry.hilt.android"
-            implementationClass = "HiltConventionPlugin"
+            implementationClass = "HiltAndroidConventionPlugin"
+        }
+        register("hiltJvm") {
+            id = "thierry.hilt.jvm"
+            implementationClass = "HiltJvmConventionPlugin"
         }
         register("kotlinParcelize") {
             id = "thierry.kotlin.parcelize"
