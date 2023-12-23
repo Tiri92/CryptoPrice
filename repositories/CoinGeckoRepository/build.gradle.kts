@@ -5,13 +5,12 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":usecases:GetBitcoinPriceUseCase"))
-    implementation(project(":libraries:ResultOf"))
-
-    //Kotlin Serialization
     implementation(libs.kotlinSerializationJson)
     implementation(libs.retrofit2ConverterKotlinSerialization)
     implementation(libs.okhttp)
+
+    implementation(projects.usecases.getBitcoinPriceUseCase)
+    implementation(projects.libraries.resultOf)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinTest)

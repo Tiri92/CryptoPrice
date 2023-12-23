@@ -11,27 +11,21 @@ android {
 
 //TODO Clean dependencies
 dependencies {
-
     implementation(libs.androidXCoreKtx)
+    implementation(libs.androidXHiltNavigationCompose)
     implementation(libs.androidXLifecycleRuntimeKtx)
     implementation(libs.androidXLifecycleRuntimeCompose)
     implementation(libs.activityCompose)
+    implementation(libs.composeUiGraphics)
+    implementation(libs.composeUiToolingPreview)
+    implementation(libs.javaxInject)
 
     implementation(libs.bundles.compose)
 
-    implementation(libs.composeUiGraphics)
-    implementation(libs.composeUiToolingPreview)
+    implementation(projects.usecases.getBitcoinPriceUseCase)
+    implementation(projects.libraries.resultOf)
 
-    implementation(libs.androidXAppCompat)
-    implementation(libs.materialDeisgn)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidXTestJunit)
     androidTestImplementation(libs.androidXTestEspressoCore)
-
-    implementation(libs.androidXHiltNavigationCompose)
-
-    implementation(libs.javaxInject)
-
-    implementation(project(":usecases:GetBitcoinPriceUseCase"))
-    implementation(project(":libraries:ResultOf"))
 }

@@ -8,30 +8,29 @@ android {
     namespace = "thierry.cryptoprice"
 }
 
+//TODO Clean dependencies
 dependencies {
-    //TODO Clean dependencies here
-
     implementation(libs.androidXCoreKtx)
+    implementation(libs.androidXHiltNavigationCompose)
     implementation(libs.androidXLifecycleRuntimeKtx)
     implementation(libs.androidXLifecycleRuntimeCompose)
     implementation(libs.activityCompose)
-    implementation(platform(libs.composeBom))
-
-    implementation(libs.bundles.compose)
-
     implementation(libs.composeUiGraphics)
     implementation(libs.composeUiToolingPreview)
+    implementation(libs.javaxInject)
+
+    implementation(libs.bundles.compose)
+    implementation(platform(libs.composeBom))
+
+    implementation(projects.repositories.coinGeckoRepository)
+    implementation(projects.features.bitcoinInfo)
+
+    debugImplementation(libs.composeUiTooling)
+    debugImplementation(libs.composeUiTestManifest)
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidXTestJunit)
     androidTestImplementation(libs.androidXTestEspressoCore)
     androidTestImplementation(libs.composeUiTestJunit4)
-    debugImplementation(libs.composeUiTooling)
-    debugImplementation(libs.composeUiTestManifest)
-
-    implementation(libs.androidXHiltNavigationCompose)
-
-    implementation(project(":repositories:CoinGeckoRepository"))
-    implementation(project(":features:BitcoinInfo"))
-
-    implementation(libs.javaxInject)
 }
