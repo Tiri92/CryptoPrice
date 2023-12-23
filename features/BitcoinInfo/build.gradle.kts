@@ -2,20 +2,11 @@ plugins {
     id(libs.plugins.thierry.android.library.get().pluginId)
     id(libs.plugins.thierry.hilt.android.get().pluginId)
     id(libs.plugins.thierry.kotlin.parcelize.get().pluginId)
+    id(libs.plugins.thierry.compose.get().pluginId)
 }
 
 android {
     namespace = "thierry.cryptoprice.bitcoininfo"
-
-    //Compose Region //TODO Create custom Plugin for compose ?
-    buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.2"
-    }
-    //End Region
 }
 
 //TODO Clean dependencies
@@ -25,7 +16,6 @@ dependencies {
     implementation(libs.androidXLifecycleRuntimeKtx)
     implementation(libs.androidXLifecycleRuntimeCompose)
     implementation(libs.activityCompose)
-    implementation(platform(libs.composeBom))
 
     implementation(libs.bundles.compose)
 

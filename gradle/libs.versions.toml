@@ -48,6 +48,7 @@ thierry-hilt-android = { id = "thierry.hilt.android" }
 thierry-jvm-library = { id = "thierry.jvm.library" }
 thierry-kotlin-parcelize = { id = "thierry.kotlin.parcelize" }
 thierry-hilt-jvm = { id = "thierry.hilt.jvm" }
+thierry-compose = { id = "thierry.compose" }
 
 [bundles]
 

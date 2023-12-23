@@ -45,5 +45,9 @@ gradlePlugin {
             id = "thierry.kotlin.parcelize"
             implementationClass = "KotlinParcelizeConventionPlugin"
         }
+        register("compose") {
+            id = "thierry.compose"
+            implementationClass = "ComposeConventionPlugin"
+        }
     }
 }

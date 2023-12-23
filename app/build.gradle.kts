@@ -30,7 +30,7 @@ dependencies {
 
     implementation(libs.androidXHiltNavigationCompose)
 
-    implementation(project(":repositories:CoinGeckoRepository")) // TODO Delete this when repo becomes full jvm
+    implementation(project(":repositories:CoinGeckoRepository"))
     implementation(project(":features:BitcoinInfo"))
 
     implementation(libs.javaxInject)
