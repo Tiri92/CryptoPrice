@@ -38,10 +38,7 @@ dependencies {
     androidTestImplementation(libs.androidXTestJunit)
     androidTestImplementation(libs.androidXTestEspressoCore)
 
-    //Hilt
     implementation(libs.androidXHiltNavigationCompose)
-    implementation(libs.hiltAndroid)
-    kapt(libs.hiltCompiler)
 
     implementation(libs.javaxInject)
 

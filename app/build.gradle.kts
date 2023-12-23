@@ -28,11 +28,7 @@ dependencies {
     debugImplementation(libs.composeUiTooling)
     debugImplementation(libs.composeUiTestManifest)
 
-
-    //Hilt
     implementation(libs.androidXHiltNavigationCompose)
-    implementation(libs.hiltAndroid)
-    kapt(libs.hiltCompiler)
 
     implementation(project(":repositories:CoinGeckoRepository")) // TODO Delete this when repo becomes full jvm
     implementation(project(":features:BitcoinInfo"))

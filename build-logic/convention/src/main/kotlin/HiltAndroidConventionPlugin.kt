@@ -1,5 +1,7 @@
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.dependencies
+import thierry.cryptoprice.libs
 
 class HiltAndroidConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -7,6 +9,11 @@ class HiltAndroidConventionPlugin : Plugin<Project> {
             with(pluginManager) {
                 apply("com.google.dagger.hilt.android")
                 apply("kotlin-kapt")
+
+                dependencies {
+                    add("implementation", libs.findLibrary("hiltAndroid").get())
+                    add("kapt", libs.findLibrary("hiltCompiler").get())
+                }
             }
         }
     }
