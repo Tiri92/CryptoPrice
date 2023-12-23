@@ -1,15 +1,25 @@
 plugins {
-    id(libs.plugins.thierry.android.application.get().pluginId)
+    id(libs.plugins.thierry.android.library.get().pluginId)
     id(libs.plugins.thierry.hilt.android.get().pluginId)
     id(libs.plugins.thierry.kotlin.parcelize.get().pluginId)
 }
 
 android {
-    namespace = "thierry.cryptoprice"
+    namespace = "thierry.cryptoprice.bitcoininfo"
+
+    //Compose Region //TODO Create custom Plugin for compose ?
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.2"
+    }
+    //End Region
 }
 
+//TODO Clean dependencies
 dependencies {
-    //TODO Clean dependencies here
 
     implementation(libs.androidXCoreKtx)
     implementation(libs.androidXLifecycleRuntimeKtx)
@@ -21,21 +31,20 @@ dependencies {
 
     implementation(libs.composeUiGraphics)
     implementation(libs.composeUiToolingPreview)
+
+    implementation(libs.androidXAppCompat)
+    implementation(libs.materialDeisgn)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidXTestJunit)
     androidTestImplementation(libs.androidXTestEspressoCore)
-    androidTestImplementation(libs.composeUiTestJunit4)
-    debugImplementation(libs.composeUiTooling)
-    debugImplementation(libs.composeUiTestManifest)
-
 
     //Hilt
     implementation(libs.androidXHiltNavigationCompose)
     implementation(libs.dagger)
     kapt(libs.daggerCompiler)
 
-    implementation(project(":repositories:CoinGeckoRepository")) // TODO Delete this when repo becomes full jvm
-    implementation(project(":features:BitcoinInfo"))
-
     implementation(libs.javaxInject)
+
+    implementation(project(":usecases:GetBitcoinPriceUseCase"))
+    implementation(project(":libraries:ResultOf"))
 }

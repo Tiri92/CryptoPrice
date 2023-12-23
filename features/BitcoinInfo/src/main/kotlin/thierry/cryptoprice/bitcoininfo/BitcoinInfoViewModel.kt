@@ -1,4 +1,4 @@
-package thierry.cryptoprice
+package thierry.cryptoprice.bitcoininfo
 
 import android.os.Parcelable
 import androidx.compose.runtime.Immutable
@@ -14,15 +14,17 @@ import thierry.cryptoprice.resultof.mapFailure
 import thierry.cryptoprice.resultof.mapSuccess
 import javax.inject.Inject
 
+private const val BITCOIN_INFO_UI_STATE = "bitcoin_info_ui_state"
+
 @HiltViewModel
-class MainActivityViewModel @Inject constructor(
+class BitcoinInfoViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val getBitcoinPriceUseCase: GetBitcoinPriceUseCase,
 ) : ViewModel() { //TODO add test to vm (don't forget to fake uc instead of mocking it)
 
-    val mainScreenUiState: StateFlow<MainScreenUiState> = savedStateHandle.getStateFlow(
-        MAIN_SCREEN_UI_STATE,
-        MainScreenUiState.Loading
+    val bitcoinInfoUiState: StateFlow<BitcoinInfoUiState> = savedStateHandle.getStateFlow(
+        BITCOIN_INFO_UI_STATE,
+        BitcoinInfoUiState.Loading
     )
 
     init {
@@ -33,38 +35,36 @@ class MainActivityViewModel @Inject constructor(
         viewModelScope.launch {
             getBitcoinPriceUseCase()
                 .mapSuccess {
-                    savedStateHandle[MAIN_SCREEN_UI_STATE] = MainScreenUiState.MainScreenInfo(
+                    savedStateHandle[BITCOIN_INFO_UI_STATE] = BitcoinInfoUiState.BitcoinInfo(
                         btcPrice = it.market_data.current_price.eur.toString(),
                         btcName = it.name,
                     )
                 }.mapFailure {
-                    savedStateHandle[MAIN_SCREEN_UI_STATE] =
-                        MainScreenUiState.Error
+                    savedStateHandle[BITCOIN_INFO_UI_STATE] =
+                        BitcoinInfoUiState.Error
                 }
         }
 
     internal fun retry() {
-        savedStateHandle[MAIN_SCREEN_UI_STATE] = MainScreenUiState.Loading
+        savedStateHandle[BITCOIN_INFO_UI_STATE] = BitcoinInfoUiState.Loading
         getBitcoinPrice()
     }
 
-    sealed interface MainScreenUiState : Parcelable {
+    sealed interface BitcoinInfoUiState : Parcelable {
 
         @Immutable
         @Parcelize
-        data object Loading : MainScreenUiState
+        data object Loading : BitcoinInfoUiState
 
         @Immutable
         @Parcelize
-        data class MainScreenInfo(
+        data class BitcoinInfo(
             val btcPrice: String,
             val btcName: String,
-        ) : MainScreenUiState
+        ) : BitcoinInfoUiState
 
         @Immutable
         @Parcelize
-        data object Error : MainScreenUiState
+        data object Error : BitcoinInfoUiState
     }
 }
-
-private const val MAIN_SCREEN_UI_STATE = "main_screen_ui_state"

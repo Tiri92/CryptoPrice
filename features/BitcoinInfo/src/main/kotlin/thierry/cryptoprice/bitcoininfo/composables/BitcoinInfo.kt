@@ -1,4 +1,4 @@
-package thierry.cryptoprice.composables
+package thierry.cryptoprice.bitcoininfo.composables
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.CircularProgressIndicator
@@ -7,26 +7,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import thierry.cryptoprice.MainActivityViewModel
+import thierry.cryptoprice.bitcoininfo.BitcoinInfoViewModel
 
 @Composable
-fun MainScreenInfo(
+internal fun BitcoinInfo(
     modifier: Modifier = Modifier,
-    viewModel: MainActivityViewModel = hiltViewModel()
+    viewModel: BitcoinInfoViewModel = hiltViewModel()
 ) {
-    when (val uiState = viewModel.mainScreenUiState.collectAsStateWithLifecycle().value) {
+    when (val uiState = viewModel.bitcoinInfoUiState.collectAsStateWithLifecycle().value) {
 
-        is MainActivityViewModel.MainScreenUiState.MainScreenInfo -> MainScreenInfo(
+        is BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo -> BitcoinInfoScreen(
             modifier = modifier,
             uiState = uiState,
         )
 
-        is MainActivityViewModel.MainScreenUiState.Error -> MainScreenError(
+        is BitcoinInfoViewModel.BitcoinInfoUiState.Error -> BitcoinInfoScreenError(
             modifier = modifier,
             onRetry = viewModel::retry
         )
 
-        MainActivityViewModel.MainScreenUiState.Loading -> Box(
+        BitcoinInfoViewModel.BitcoinInfoUiState.Loading -> Box(
             modifier = modifier,
             contentAlignment = Alignment.Center
         ) {

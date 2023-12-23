@@ -1,4 +1,4 @@
-package thierry.cryptoprice.composables
+package thierry.cryptoprice.bitcoininfo.composables
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -19,14 +19,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import thierry.cryptoprice.MainActivityViewModel
-import thierry.cryptoprice.R
-import thierry.cryptoprice.ui.theme.BitcoinTheme
+import thierry.cryptoprice.bitcoininfo.BitcoinInfoViewModel
+import thierry.cryptoprice.bitcoininfo.R
 
 @Composable
-internal fun MainScreenInfo(
+internal fun BitcoinInfoScreen(
     modifier: Modifier = Modifier,
-    uiState: MainActivityViewModel.MainScreenUiState.MainScreenInfo,
+    uiState: BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo,
 ) {
     Column(
         modifier = modifier.padding(16.dp),
@@ -61,13 +60,13 @@ internal fun MainScreenInfo(
 
 @Preview(showBackground = true)
 @Composable
-fun MainScreenInfoPreview() { //TODO move it to debug folder ?
-    BitcoinTheme {
-        MainScreenInfo(
-            uiState = MainActivityViewModel.MainScreenUiState.MainScreenInfo(
-                btcPrice = "500 000",
-                btcName = "Bitcoin"
-            )
+fun MainScreenInfoPreview() { //TODO move it to debug folder and how to get Theme ?
+    //BitcoinTheme {
+    BitcoinInfoScreen(
+        uiState = BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo(
+            btcPrice = "500 000",
+            btcName = "Bitcoin"
         )
-    }
+    )
+    // }
 }

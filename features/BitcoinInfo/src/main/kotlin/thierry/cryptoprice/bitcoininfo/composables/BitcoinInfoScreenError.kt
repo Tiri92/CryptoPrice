@@ -1,4 +1,4 @@
-package thierry.cryptoprice.composables
+package thierry.cryptoprice.bitcoininfo.composables
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,11 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
-import thierry.cryptoprice.R
-import thierry.cryptoprice.ui.theme.BitcoinTheme
+import thierry.cryptoprice.bitcoininfo.R
 
 @Composable
-internal fun MainScreenError(
+internal fun BitcoinInfoScreenError(
     modifier: Modifier = Modifier,
     onRetry: () -> Unit
 ) {
@@ -41,10 +40,10 @@ internal fun MainScreenError(
 
 @Preview(showBackground = true)
 @Composable
-fun MainScreenErrorPreview() { //TODO move it to debug folder ?
-    BitcoinTheme {
-        MainScreenError(
-            onRetry = {}
-        )
-    }
+fun MainScreenErrorPreview() { //TODO move it to debug folder and how to get theme ?
+    //BitcoinTheme {
+    BitcoinInfoScreenError(
+        onRetry = {}
+    )
+    // }
 }

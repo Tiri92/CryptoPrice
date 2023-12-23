@@ -7,8 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
-import thierry.cryptoprice.composables.MainScreenInfo
+import thierry.cryptoprice.navigation.MainNavHost
 import thierry.cryptoprice.ui.theme.BitcoinTheme
 
 @AndroidEntryPoint
@@ -19,12 +20,15 @@ class MainActivity : ComponentActivity() {
         setContent {
             BitcoinTheme {
                 // A surface container using the 'background' color from the theme
+                val navController = rememberNavController()
+
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreenInfo(
-                        modifier = Modifier.fillMaxSize(),
+                    MainNavHost(
+                        navController = navController,
+                        modifier = Modifier.fillMaxSize()
                     )
                 }
             }
