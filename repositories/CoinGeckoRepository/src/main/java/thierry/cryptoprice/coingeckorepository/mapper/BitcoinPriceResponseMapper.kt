@@ -8,7 +8,7 @@ import thierry.cryptoprice.getbitcoinpriceusecase.model.MarketData as MarketData
 
 internal fun BitcoinPriceResponse.toBitcoinPrice(): BitcoinPrice = BitcoinPrice(
     id = this.id,
-    market_data = this.market_data.toMarketDataUc(),
+    market_data = this.marketData.toMarketDataUc(),
     name = this.name,
     symbol = this.symbol,
 )
@@ -16,7 +16,19 @@ internal fun BitcoinPriceResponse.toBitcoinPrice(): BitcoinPrice = BitcoinPrice(
 internal fun MarketData.toMarketDataUc(): MarketDataFromUc =
     MarketDataFromUc(
         CurrentPrice(
-            eur = this.current_price.eur,
-            usd = this.current_price.usd
+            eur = this.currentPrice.eur,
+            usd = this.currentPrice.usd,
+            aud = this.currentPrice.aud,
+            cad = this.currentPrice.cad,
+            chf = this.currentPrice.chf,
+            eth = this.currentPrice.eth,
+            gbp = this.currentPrice.gbp,
+            jpy = this.currentPrice.jpy,
+            mxn = this.currentPrice.mxn,
+            pln = this.currentPrice.pln,
+            rub = this.currentPrice.rub,
+            xag = this.currentPrice.xag,
+            xau = this.currentPrice.xau,
+            zar = this.currentPrice.zar,
         )
     )

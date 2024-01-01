@@ -19,6 +19,7 @@ internal fun BitcoinInfo(
         is BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo -> BitcoinInfoScreen(
             modifier = modifier,
             uiState = uiState,
+            onCurrencySelected = viewModel::setPreferredCurrency
         )
 
         is BitcoinInfoViewModel.BitcoinInfoUiState.Error -> BitcoinInfoScreenError(

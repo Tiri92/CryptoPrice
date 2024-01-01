@@ -2,6 +2,7 @@ package thierry.cryptoprice.bitcoininfo.composables
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,9 +11,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,15 +31,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import thierry.cryptoprice.bitcoininfo.BitcoinInfoViewModel
 import thierry.cryptoprice.bitcoininfo.R
+import thierry.cryptoprice.getbitcoinpriceusecase.model.CurrentPrice
+import kotlin.reflect.KProperty1
 
 @Composable
 internal fun BitcoinInfoScreen(
+    onCurrencySelected: (selectedCurrency: String) -> Unit,
     modifier: Modifier = Modifier,
     uiState: BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo,
 ) {
     Column(
         modifier = modifier.padding(16.dp),
     ) {
+        var expanded by rememberSaveable { mutableStateOf(false) }
+
         Surface(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(8.dp),
@@ -51,9 +66,53 @@ internal fun BitcoinInfoScreen(
 
                 Text(
                     modifier = Modifier.align(Alignment.CenterVertically),
-                    text = "${uiState.btcName} ${uiState.btcPrice}",
+                    text = "${uiState.btcName} ${uiState.btcPrice} ${uiState.preferredCurrency}",
+                )
+
+                Spacer(modifier = Modifier.width(16.dp))
+
+                Icon(
+                    modifier = Modifier
+                        .align(Alignment.CenterVertically)
+                        .clickable {
+                            expanded = true
+                        },
+                    imageVector = Icons.Filled.ArrowDropDown,
+                    contentDescription = null
                 )
             }
+
+            DropDownMenu(
+                expanded = expanded,
+                onDismiss = {
+                    expanded = false
+                },
+                onCurrencySelected = onCurrencySelected,
+                availableCurrenciesList = uiState.availableCurrenciesList
+            )
+        }
+    }
+}
+
+@Composable
+private fun DropDownMenu(
+    availableCurrenciesList: List<KProperty1<CurrentPrice, *>>,
+    expanded: Boolean,
+    onDismiss: () -> Unit,
+    onCurrencySelected: (selectedCurrency: String) -> Unit,
+) {
+    DropdownMenu(
+        expanded = expanded,
+        onDismissRequest = { onDismiss() }
+    ) {
+        availableCurrenciesList.forEach {
+            DropdownMenuItem(
+                text = { Text(it.name) },
+                onClick = {
+                    onCurrencySelected(it.name)
+                    onDismiss()
+                }
+            )
         }
     }
 }
@@ -64,9 +123,12 @@ fun MainScreenInfoPreview() { //TODO move it to debug folder and how to get Them
     //BitcoinTheme {
     BitcoinInfoScreen(
         uiState = BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo(
+            availableCurrenciesList = listOf(),
             btcPrice = "500 000",
-            btcName = "Bitcoin"
-        )
+            preferredCurrency = "eur",
+            btcName = "Bitcoin",
+        ),
+        onCurrencySelected = {}
     )
     // }
 }

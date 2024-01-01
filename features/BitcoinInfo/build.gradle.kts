@@ -19,10 +19,12 @@ dependencies {
     implementation(libs.composeUiGraphics)
     implementation(libs.composeUiToolingPreview)
     implementation(libs.javaxInject)
+    implementation(libs.kotlinReflect)
 
     implementation(libs.bundles.compose)
 
     implementation(projects.usecases.getBitcoinPriceUseCase)
+    implementation(projects.usecases.preferredCurrencyUseCase)
     implementation(projects.libraries.resultOf)
 
     testImplementation(libs.junit)

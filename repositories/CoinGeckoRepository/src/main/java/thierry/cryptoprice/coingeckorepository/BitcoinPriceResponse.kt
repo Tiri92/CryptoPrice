@@ -8,7 +8,7 @@ data class BitcoinPriceResponse(
     @SerialName("id")
     val id: String,
     @SerialName("market_data")
-    val market_data: MarketData,
+    val marketData: MarketData,
     @SerialName("name")
     val name: String,
     @SerialName("symbol")
@@ -18,7 +18,7 @@ data class BitcoinPriceResponse(
 @Serializable
 data class MarketData(
     @SerialName("current_price")
-    val current_price: CurrentPrice
+    val currentPrice: CurrentPrice
 )
 
 @Serializable
@@ -27,4 +27,28 @@ class CurrentPrice(
     val eur: Double,
     @SerialName("usd")
     val usd: Double,
+    @SerialName("aud")
+    val aud: Double,
+    @SerialName("cad")
+    val cad: Double,
+    @SerialName("chf")
+    val chf: Double,
+    @SerialName("eth")
+    val eth: Double,
+    @SerialName("gbp")
+    val gbp: Double,
+    @SerialName("jpy")
+    val jpy: Double,
+    @SerialName("mxn")
+    val mxn: Double,
+    @SerialName("pln")
+    val pln: Double,
+    @SerialName("rub")
+    val rub: Double,
+    @SerialName("xag")
+    val xag: Double,
+    @SerialName("xau")
+    val xau: Double,
+    @SerialName("zar")
+    val zar: Double,
 )

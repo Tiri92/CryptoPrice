@@ -16,7 +16,7 @@ class BitcoinPriceResponseMapperTest {
         val response = Random.nextBitcoinPriceResponse()
         val expected = BitcoinPrice(
             id = response.id,
-            market_data = response.market_data.toMarketDataUc(),
+            market_data = response.marketData.toMarketDataUc(),
             name = response.name,
             symbol = response.symbol
         )
@@ -37,13 +37,25 @@ class BitcoinPriceResponseMapperTest {
         val response = Random.nextBitcoinPriceResponse()
         val expected = MarketData(
             CurrentPrice(
-                eur = response.market_data.current_price.eur,
-                usd = response.market_data.current_price.usd
+                eur = response.marketData.currentPrice.eur,
+                usd = response.marketData.currentPrice.usd,
+                aud = response.marketData.currentPrice.aud,
+                cad = response.marketData.currentPrice.cad,
+                chf = response.marketData.currentPrice.chf,
+                eth = response.marketData.currentPrice.eth,
+                gbp = response.marketData.currentPrice.gbp,
+                jpy = response.marketData.currentPrice.jpy,
+                mxn = response.marketData.currentPrice.mxn,
+                pln = response.marketData.currentPrice.pln,
+                rub = response.marketData.currentPrice.rub,
+                xag = response.marketData.currentPrice.xag,
+                xau = response.marketData.currentPrice.xau,
+                zar = response.marketData.currentPrice.zar,
             )
         )
 
         //WHEN
-        val result = response.market_data.toMarketDataUc()
+        val result = response.marketData.toMarketDataUc()
 
         //THEN
         assertEquals(
