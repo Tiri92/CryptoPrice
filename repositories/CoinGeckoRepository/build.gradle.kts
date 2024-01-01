@@ -14,6 +14,6 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinTest)
-    testImplementation(libs.kotlinXCouroutinesTestJvm)
+    testImplementation(libs.kotlinXCoroutinesTestJvm)
     testImplementation(libs.mockkJvm)
 }

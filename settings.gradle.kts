@@ -19,6 +19,8 @@ rootProject.name = "CryptoPrice"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
 include(":repositories:CoinGeckoRepository")
+include(":repositories:DataStoreRepository")
 include(":usecases:GetBitcoinPriceUseCase")
+include(":usecases:PreferredCurrencyUseCase")
 include(":libraries:ResultOf")
 include(":features:BitcoinInfo")

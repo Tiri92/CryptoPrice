@@ -23,6 +23,7 @@ dependencies {
     implementation(platform(libs.composeBom))
 
     implementation(projects.repositories.coinGeckoRepository)
+    implementation(projects.repositories.dataStoreRepository)
     implementation(projects.features.bitcoinInfo)
 
     debugImplementation(libs.composeUiTooling)
