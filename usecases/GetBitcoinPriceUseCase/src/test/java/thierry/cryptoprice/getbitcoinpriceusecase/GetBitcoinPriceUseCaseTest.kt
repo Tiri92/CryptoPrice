@@ -51,7 +51,19 @@ private fun Random.nextBitcoinPrice() =
         market_data = MarketData(
             current_price = CurrentPrice(
                 eur = 1.0,
-                usd = 1.0
+                usd = 1.0,
+                aud = 1.0,
+                cad = 1.0,
+                chf = 1.0,
+                eth = 1.0,
+                gbp = 1.0,
+                jpy = 1.0,
+                mxn = 1.0,
+                pln = 1.0,
+                rub = 1.0,
+                xag = 1.0,
+                xau = 1.0,
+                zar = 1.0,
             )
         ),
         name = "",
