@@ -31,8 +31,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import thierry.cryptoprice.bitcoininfo.BitcoinInfoViewModel
 import thierry.cryptoprice.bitcoininfo.R
-import thierry.cryptoprice.getbitcoinpriceusecase.model.CurrentPrice
-import kotlin.reflect.KProperty1
 
 @Composable
 internal fun BitcoinInfoScreen(
@@ -96,7 +94,7 @@ internal fun BitcoinInfoScreen(
 
 @Composable
 private fun DropDownMenu(
-    availableCurrenciesList: List<KProperty1<CurrentPrice, *>>,
+    availableCurrenciesList: List<String>,
     expanded: Boolean,
     onDismiss: () -> Unit,
     onCurrencySelected: (selectedCurrency: String) -> Unit,
@@ -107,9 +105,9 @@ private fun DropDownMenu(
     ) {
         availableCurrenciesList.forEach {
             DropdownMenuItem(
-                text = { Text(it.name) },
+                text = { Text(it) },
                 onClick = {
-                    onCurrencySelected(it.name)
+                    onCurrencySelected(it)
                     onDismiss()
                 }
             )

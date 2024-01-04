@@ -15,7 +15,6 @@ import thierry.cryptoprice.preferredcurrencyusecase.PreferredCurrencyUseCase
 import thierry.cryptoprice.resultof.mapFailure
 import thierry.cryptoprice.resultof.mapSuccess
 import javax.inject.Inject
-import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
 
 private const val BITCOIN_INFO_UI_STATE = "bitcoin_info_ui_state"
@@ -38,29 +37,33 @@ class BitcoinInfoViewModel @Inject constructor(
 
     private fun getBitcoinPrice() =
         viewModelScope.launch {
-            getBitcoinPriceUseCase()
-                .mapSuccess { bitcoinPrice ->
-                    preferredCurrencyUseCase.getPreferredCurrencyUseCase()
-                        .collect { preferredCurrency: String? ->
+            getBitcoinPriceUseCase().mapSuccess { bitcoinPrice ->
+                preferredCurrencyUseCase.getPreferredCurrencyUseCase()
+                    .collect { preferredCurrency: String? ->
 
-                            val btcPrice = CurrentPrice::class.memberProperties.find { predicate ->
-                                preferredCurrency == predicate.name
-                            }
-
-                            savedStateHandle[BITCOIN_INFO_UI_STATE] =
-                                BitcoinInfoUiState.BitcoinInfo(
-                                    btcPrice = btcPrice?.get(bitcoinPrice.market_data.current_price)
-                                        ?.toString()
-                                        ?: bitcoinPrice.market_data.current_price.eur.toString(),
-                                    preferredCurrency = btcPrice?.name ?: "eur",
-                                    availableCurrenciesList = CurrentPrice::class.memberProperties.toList(),
-                                    btcName = bitcoinPrice.name,
-                                )
+                        val btcPrice = CurrentPrice::class.memberProperties.find { predicate ->
+                            preferredCurrency == predicate.name
                         }
-                }.mapFailure {
-                    savedStateHandle[BITCOIN_INFO_UI_STATE] =
-                        BitcoinInfoUiState.Error
-                }
+
+                        val availableCurrenciesList = mutableListOf<String>()
+                        CurrentPrice::class.memberProperties.forEach { currentPrice ->
+                            availableCurrenciesList.add(currentPrice.name)
+                        }
+
+                        savedStateHandle[BITCOIN_INFO_UI_STATE] =
+                            BitcoinInfoUiState.BitcoinInfo(
+                                btcPrice = btcPrice?.get(bitcoinPrice.market_data.current_price)
+                                    ?.toString()
+                                    ?: bitcoinPrice.market_data.current_price.eur.toString(),
+                                preferredCurrency = btcPrice?.name ?: "eur",
+                                availableCurrenciesList = availableCurrenciesList,
+                                btcName = bitcoinPrice.name,
+                            )
+                    }
+            }.mapFailure {
+                savedStateHandle[BITCOIN_INFO_UI_STATE] =
+                    BitcoinInfoUiState.Error
+            }
         }
 
     internal fun retry() {
@@ -85,7 +88,7 @@ class BitcoinInfoViewModel @Inject constructor(
             val btcName: String,
             val btcPrice: String,
             val preferredCurrency: String,
-            val availableCurrenciesList: List<KProperty1<CurrentPrice, *>>,
+            val availableCurrenciesList: List<String>,
         ) : BitcoinInfoUiState
 
         @Immutable
