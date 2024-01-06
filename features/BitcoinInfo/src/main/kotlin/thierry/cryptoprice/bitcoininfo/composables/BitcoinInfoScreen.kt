@@ -55,7 +55,7 @@ internal fun BitcoinInfoScreen(
         ) {
             Row(modifier = Modifier.padding(8.dp)) {
                 Image(
-                    painterResource(id = R.drawable.bitcoin_logo),
+                    painterResource(id = R.drawable.bitoin_logo),
                     contentDescription = null,
                     modifier = Modifier.size(80.dp),
                 )
