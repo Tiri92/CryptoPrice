@@ -12,11 +12,13 @@ import kotlinx.coroutines.flow.map
 import thierry.cryptoprice.preferredcurrencyusecase.PreferredCurrencyDataStoreRepository
 import javax.inject.Inject
 
+private const val PREFERRED_CURRENCY_DATASTORE = "PreferredCurrencyDataStore"
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = PREFERRED_CURRENCY_DATASTORE)
+
 class PreferredCurrencyDataStoreRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context
 ) : PreferredCurrencyDataStoreRepository {
 
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = PREFERRED_CURRENCY_DATASTORE)
     override suspend fun getPreferredCurrency(): Flow<String?> =
         context.dataStore.data.map { preferredCurrency ->
             preferredCurrency[PREFERRED_CURRENCY_KEY]
@@ -30,5 +32,4 @@ class PreferredCurrencyDataStoreRepositoryImpl @Inject constructor(
     }
 }
 
-private const val PREFERRED_CURRENCY_DATASTORE = "PreferredCurrencyDataStore"
 private val PREFERRED_CURRENCY_KEY = stringPreferencesKey(name = "Preferred_Currency")
