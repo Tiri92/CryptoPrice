@@ -14,7 +14,8 @@ targetSdk = "34"
 activityCompose = "1.8.2"
 androidXAppCompat = "1.6.1"
 androidXCoreKtx = "1.12.0"
-androidxCoreSplashscreen = "1.0.1"
+androidXComposeMaterial = "1.5.4"
+androidXCoreSplashscreen = "1.0.1"
 androidXHiltNavigationCompose = "1.1.0"
 androidXLifecycleRuntimeCompose = "2.6.2"
 androidXLifecycleRuntimeKtx = "2.6.2"
@@ -69,8 +70,11 @@ androidXAppCompat = { module = "androidx.appcompat:appcompat", version.ref = "an
 # AndroidXCoreKtx
 androidXCoreKtx = { module = "androidx.core:core-ktx", version.ref = "androidXCoreKtx" }
 
+# AndroidXComposeMaterial
+androidXComposeMaterial = { module = "androidx.compose.material:material", version.ref = "androidXComposeMaterial" }
+
 # AndroidXCoreSplashScreen
-androidxCoreSplashScreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidxCoreSplashscreen" }
+androidXCoreSplashScreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidXCoreSplashscreen" }
 
 # AndroidXDataStore
 dataStore = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStore" }

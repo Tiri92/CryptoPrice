@@ -126,7 +126,7 @@ fun MainScreenInfoPreview() { //TODO move it to debug folder and how to get Them
             preferredCurrency = "eur",
             btcName = "Bitcoin",
         ),
-        onCurrencySelected = {}
+        onCurrencySelected = {},
     )
     // }
 }

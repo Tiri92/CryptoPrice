@@ -12,6 +12,7 @@ android {
 //TODO Clean dependencies
 dependencies {
     implementation(libs.androidXCoreKtx)
+    implementation(libs.androidXComposeMaterial)
     implementation(libs.androidXHiltNavigationCompose)
     implementation(libs.androidXLifecycleRuntimeKtx)
     implementation(libs.androidXLifecycleRuntimeCompose)

@@ -58,6 +58,7 @@ class BitcoinInfoViewModel @Inject constructor(
                                 preferredCurrency = btcPrice?.name ?: "eur",
                                 availableCurrenciesList = availableCurrenciesList,
                                 btcName = bitcoinPrice.name,
+                                isPullToRefreshLoading = false
                             )
                     }
             }.mapFailure {
@@ -68,6 +69,14 @@ class BitcoinInfoViewModel @Inject constructor(
 
     internal fun retryGetBitcoinPrice() {
         savedStateHandle[BITCOIN_INFO_UI_STATE] = BitcoinInfoUiState.Loading
+        getBitcoinPrice()
+    }
+
+    internal fun pullRefreshBitcoinPrice() {
+        (savedStateHandle[BITCOIN_INFO_UI_STATE]) =
+            (bitcoinInfoUiState.value as BitcoinInfoUiState.BitcoinInfo)
+                .copy(isPullToRefreshLoading = true)
+
         getBitcoinPrice()
     }
 
@@ -89,6 +98,7 @@ class BitcoinInfoViewModel @Inject constructor(
             val btcPrice: String,
             val preferredCurrency: String,
             val availableCurrenciesList: List<String>,
+            val isPullToRefreshLoading: Boolean = false,
         ) : BitcoinInfoUiState
 
         @Immutable

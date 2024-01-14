@@ -114,6 +114,40 @@ class BitcoinInfoViewModelTest {
     }
 
     @Test
+    fun `pullRefreshBitcoinPrice should call getBitcoinPrice`() = runTest {
+        //WHEN
+        viewModel = BitcoinInfoViewModel(
+            savedStateHandle = savedStateHandle,
+            getBitcoinPriceUseCase = object : FakeGetBitcoinPriceUseCase() {
+                override suspend fun invoke(): ResultOf<BitcoinPrice, CryptoPriceException> =
+                    ResultOf.success(expectedBitcoinPrice())
+            },
+            preferredCurrencyUseCase = object : FakePreferredCurrencyUseCase() {
+                override suspend fun getPreferredCurrencyUseCase(): Flow<String?> =
+                    MutableStateFlow("")
+            }
+        )
+
+        //THEN
+        turbineScope {
+            viewModel.bitcoinInfoUiState.test {
+                skipItems(2) //Skip initialization call for getBitcoinPrice
+                viewModel.pullRefreshBitcoinPrice()
+
+                assertEquals(
+                    true,
+                    (awaitItem() as BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo).isPullToRefreshLoading
+                )
+                (awaitItem() as BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo).run {
+                    assertEquals("Bitcoin", btcName)
+                    assertEquals("1000000.0", btcPrice)
+                    assertEquals(false, isPullToRefreshLoading)
+                }
+            }
+        }
+    }
+
+    @Test
     fun `Should return preferredCurrency when preferredCurrencyUseCase succeeded`() = runTest {
         //WHEN
         viewModel = BitcoinInfoViewModel(
@@ -170,25 +204,25 @@ class BitcoinInfoViewModelTest {
 
 private fun expectedBitcoinPrice(): BitcoinPrice =
     BitcoinPrice(
-        id = "",
+        id = "bitcoin",
         market_data = MarketData(
             current_price = CurrentPrice(
-                eur = 1.0,
-                usd = 1.0,
-                aud = 1.0,
-                cad = 1.0,
-                chf = 1.0,
-                eth = 1.0,
-                gbp = 1.0,
-                jpy = 1.0,
-                mxn = 1.0,
-                pln = 1.0,
-                rub = 1.0,
-                xag = 1.0,
-                xau = 1.0,
-                zar = 1.0,
+                eur = 1000000.0,
+                usd = 1000000.0,
+                aud = 1000000.0,
+                cad = 1000000.0,
+                chf = 1000000.0,
+                eth = 1000000.0,
+                gbp = 1000000.0,
+                jpy = 1000000.0,
+                mxn = 1000000.0,
+                pln = 1000000.0,
+                rub = 1000000.0,
+                xag = 1000000.0,
+                xau = 1000000.0,
+                zar = 1000000.0,
             )
         ),
-        name = "",
-        symbol = ""
+        name = "Bitcoin",
+        symbol = "btc"
     )
