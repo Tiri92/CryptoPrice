@@ -31,24 +31,24 @@ internal fun BitcoinInfo(
         }
 
         is BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo -> {
-            BitcoinInfoScreen(
-                modifier = modifier,
-                uiState = uiState,
-                onCurrencySelected = viewModel::setPreferredCurrency,
-            )
-
             val pullRefreshState = rememberPullRefreshState(
                 refreshing = uiState.isPullToRefreshLoading,
                 onRefresh = viewModel::pullRefreshBitcoinPrice
             )
 
-            Box(
-                modifier = modifier
-                    .pullRefresh(pullRefreshState)
-                    .verticalScroll(rememberScrollState()),
-                contentAlignment = Alignment.TopCenter
-            ) {
+            Box {
+                BitcoinInfoScreen(
+                    modifier = modifier
+                        .pullRefresh(pullRefreshState)
+                        .verticalScroll(
+                            rememberScrollState()
+                        ),
+                    uiState = uiState,
+                    onCurrencySelected = viewModel::setPreferredCurrency,
+                )
+
                 PullRefreshIndicator(
+                    modifier = Modifier.align(Alignment.TopCenter),
                     refreshing = uiState.isPullToRefreshLoading,
                     state = pullRefreshState,
                 )
