@@ -5,4 +5,8 @@ plugins {
 dependencies {
     implementation(libs.javaxInject)
     implementation(libs.kotlinXCoroutinesCoreJvm)
+
+    testImplementation(libs.kotlinTest)
+    testImplementation(libs.kotlinXCoroutinesTestJvm)
+    testImplementation(libs.turbine)
 }

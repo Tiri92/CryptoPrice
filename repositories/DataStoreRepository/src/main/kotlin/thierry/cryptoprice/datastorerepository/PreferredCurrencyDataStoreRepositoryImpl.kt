@@ -19,12 +19,12 @@ class PreferredCurrencyDataStoreRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context
 ) : PreferredCurrencyDataStoreRepository {
 
-    override suspend fun getPreferredCurrency(): Flow<String?> =
+    override suspend fun getPreferredCurrency(): Flow<String?> = //TODO Handle exception ?
         context.dataStore.data.map { preferredCurrency ->
             preferredCurrency[PREFERRED_CURRENCY_KEY]
         }
 
-    override suspend fun setPreferredCurrency(preferredCurrencyValue: String) {
+    override suspend fun setPreferredCurrency(preferredCurrencyValue: String) { //TODO Handle exception ?
         context.dataStore.edit { preferredCurrency ->
             preferredCurrency[PREFERRED_CURRENCY_KEY] =
                 preferredCurrencyValue
