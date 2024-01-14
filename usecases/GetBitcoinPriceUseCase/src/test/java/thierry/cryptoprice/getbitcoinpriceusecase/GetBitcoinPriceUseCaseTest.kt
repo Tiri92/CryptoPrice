@@ -16,7 +16,7 @@ class GetBitcoinPriceUseCaseTest {
     fun `GetBitcoinPriceUseCase should return success when repo Succeeded`() = runTest {
         //GIVEN
         val getBitcoinPriceUseCase =
-            GetBitcoinPriceUseCase(coinGeckoRepository = object : FakeCoinGeckoRepository() {
+            GetBitcoinPriceUseCaseImpl(coinGeckoRepository = object : FakeCoinGeckoRepository() {
                 override suspend fun getBitcoinPrice(): ResultOf<BitcoinPrice, CryptoPriceException> =
                     ResultOf.success(Random.nextBitcoinPrice())
             })
@@ -32,7 +32,7 @@ class GetBitcoinPriceUseCaseTest {
     fun `GetBitcoinPriceUseCase should return failure when repo fail`() = runTest {
         //GIVEN
         val getBitcoinPriceUseCase =
-            GetBitcoinPriceUseCase(coinGeckoRepository = object : FakeCoinGeckoRepository() {
+            GetBitcoinPriceUseCaseImpl(coinGeckoRepository = object : FakeCoinGeckoRepository() {
                 override suspend fun getBitcoinPrice(): ResultOf<BitcoinPrice, CryptoPriceException> =
                     ResultOf.failure(CryptoPriceException.InfoNotFoundPriceException)
             })

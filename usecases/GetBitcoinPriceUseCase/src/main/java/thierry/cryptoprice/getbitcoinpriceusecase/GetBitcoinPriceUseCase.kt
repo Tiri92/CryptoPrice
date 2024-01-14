@@ -5,9 +5,13 @@ import thierry.cryptoprice.getbitcoinpriceusecase.model.CryptoPriceException
 import thierry.cryptoprice.resultof.ResultOf
 import javax.inject.Inject
 
-class GetBitcoinPriceUseCase @Inject constructor(
+fun interface GetBitcoinPriceUseCase {
+    suspend operator fun invoke(): ResultOf<BitcoinPrice, CryptoPriceException>
+}
+
+class GetBitcoinPriceUseCaseImpl @Inject constructor(
     private val coinGeckoRepository: CoinGeckoRepository,
-) {
-    suspend operator fun invoke(): ResultOf<BitcoinPrice, CryptoPriceException> =
+) : GetBitcoinPriceUseCase {
+    override suspend operator fun invoke(): ResultOf<BitcoinPrice, CryptoPriceException> =
         coinGeckoRepository.getBitcoinPrice()
 }

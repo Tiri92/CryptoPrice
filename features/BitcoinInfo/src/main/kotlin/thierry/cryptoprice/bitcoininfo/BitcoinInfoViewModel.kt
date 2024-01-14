@@ -24,7 +24,7 @@ class BitcoinInfoViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val getBitcoinPriceUseCase: GetBitcoinPriceUseCase,
     private val preferredCurrencyUseCase: PreferredCurrencyUseCase,
-) : ViewModel() { //TODO add test to vm (don't forget to fake uc instead of mocking it)
+) : ViewModel() {
 
     val bitcoinInfoUiState: StateFlow<BitcoinInfoUiState> = savedStateHandle.getStateFlow(
         BITCOIN_INFO_UI_STATE,
@@ -66,12 +66,12 @@ class BitcoinInfoViewModel @Inject constructor(
             }
         }
 
-    internal fun retry() {
+    internal fun retryGetBitcoinPrice() {
         savedStateHandle[BITCOIN_INFO_UI_STATE] = BitcoinInfoUiState.Loading
         getBitcoinPrice()
     }
 
-    internal fun setPreferredCurrency(preferredCurrency: String) =
+    internal fun setPreferredCurrency(preferredCurrency: String) = //TODO Add test for this function
         viewModelScope.launch {
             preferredCurrencyUseCase.setPreferredCurrencyUseCase(preferredCurrency)
         }

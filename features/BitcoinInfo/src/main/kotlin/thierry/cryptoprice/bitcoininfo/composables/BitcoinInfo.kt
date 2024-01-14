@@ -24,7 +24,7 @@ internal fun BitcoinInfo(
 
         is BitcoinInfoViewModel.BitcoinInfoUiState.Error -> BitcoinInfoScreenError(
             modifier = modifier,
-            onRetry = viewModel::retry
+            onRetry = viewModel::retryGetBitcoinPrice
         )
 
         BitcoinInfoViewModel.BitcoinInfoUiState.Loading -> Box(

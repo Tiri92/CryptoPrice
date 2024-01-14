@@ -28,6 +28,7 @@ dependencies {
     implementation(projects.libraries.resultOf)
 
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidXTestJunit)
-    androidTestImplementation(libs.androidXTestEspressoCore)
+    testImplementation(libs.kotlinTest)
+    testImplementation(libs.kotlinXCoroutinesTestJvm)
+    testImplementation(libs.turbine)
 }

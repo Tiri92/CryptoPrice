@@ -3,13 +3,19 @@ package thierry.cryptoprice.preferredcurrencyusecase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class PreferredCurrencyUseCase @Inject constructor(
+interface PreferredCurrencyUseCase {
+    suspend fun getPreferredCurrencyUseCase(): Flow<String?>
+
+    suspend fun setPreferredCurrencyUseCase(preferredCurrency: String)
+}
+
+class PreferredCurrencyUseCaseImpl @Inject constructor(
     private val preferredCurrencyDataStoreRepository: PreferredCurrencyDataStoreRepository,
-) {
-    suspend fun getPreferredCurrencyUseCase(): Flow<String?> =
+) : PreferredCurrencyUseCase {
+    override suspend fun getPreferredCurrencyUseCase(): Flow<String?> =
         preferredCurrencyDataStoreRepository.getPreferredCurrency()
 
-    suspend fun setPreferredCurrencyUseCase(preferredCurrency: String) =
+    override suspend fun setPreferredCurrencyUseCase(preferredCurrency: String) =
         preferredCurrencyDataStoreRepository.setPreferredCurrency(
             preferredCurrency
         )
