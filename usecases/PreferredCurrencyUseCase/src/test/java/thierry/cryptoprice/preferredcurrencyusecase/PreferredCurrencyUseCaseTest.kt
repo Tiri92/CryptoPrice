@@ -9,7 +9,7 @@ import org.junit.Test
 import thierry.cryptoprice.preferredcurrencyusecase.fake.FakePreferredCurrencyDataStoreRepository
 import kotlin.test.assertEquals
 
-class PreferredCurrencyUseCaseTest { //TODO Add test for setPreferredCurrency function
+class PreferredCurrencyUseCaseTest {
 
     @Test
     fun `preferredCurrencyUseCase should return preferredCurrency when repo Succeeded`() =
@@ -53,4 +53,32 @@ class PreferredCurrencyUseCaseTest { //TODO Add test for setPreferredCurrency fu
             }
         }
     }
+
+    @Test
+    fun `preferredCurrencyUseCase should return new preferredCurrency when setPreferredCurrencyUseCase is called`() =
+        runTest {
+            //GIVEN
+            var defaultPreferredCurrency = "eur"
+            val preferredCurrencyUseCase =
+                PreferredCurrencyUseCaseImpl(preferredCurrencyDataStoreRepository = object :
+                    FakePreferredCurrencyDataStoreRepository() {
+                    override suspend fun getPreferredCurrency(): Flow<String?> =
+                        MutableStateFlow(defaultPreferredCurrency)
+
+                    override suspend fun setPreferredCurrency(preferredCurrencyValue: String) {
+                        defaultPreferredCurrency = preferredCurrencyValue
+                    }
+                })
+
+            //WHEN
+            preferredCurrencyUseCase.setPreferredCurrencyUseCase("usd")
+            val result = preferredCurrencyUseCase.getPreferredCurrencyUseCase()
+
+            //THEN
+            turbineScope {
+                result.test {
+                    assertEquals("usd", awaitItem())
+                }
+            }
+        }
 }

@@ -1,6 +1,7 @@
 package thierry.cryptoprice.bitcoininfo
 
 import android.os.Parcelable
+import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -35,7 +36,8 @@ class BitcoinInfoViewModel @Inject constructor(
         getBitcoinPrice()
     }
 
-    private fun getBitcoinPrice() =
+    @VisibleForTesting
+    fun getBitcoinPrice() =
         viewModelScope.launch {
             getBitcoinPriceUseCase().mapSuccess { bitcoinPrice ->
                 preferredCurrencyUseCase.getPreferredCurrencyUseCase()
@@ -80,7 +82,7 @@ class BitcoinInfoViewModel @Inject constructor(
         getBitcoinPrice()
     }
 
-    internal fun setPreferredCurrency(preferredCurrency: String) = //TODO Add test for this function
+    internal fun setPreferredCurrency(preferredCurrency: String) =
         viewModelScope.launch {
             preferredCurrencyUseCase.setPreferredCurrencyUseCase(preferredCurrency)
         }

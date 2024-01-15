@@ -200,6 +200,40 @@ class BitcoinInfoViewModelTest {
             }
         }
     }
+
+    @Test
+    fun `Should update defaultCurrency when setPreferredCurrencyUseCase is called`() = runTest {
+        //WHEN
+        var defaultPreferredCurrency = "eur"
+        viewModel = BitcoinInfoViewModel(
+            savedStateHandle = savedStateHandle,
+            getBitcoinPriceUseCase = object : FakeGetBitcoinPriceUseCase() {
+                override suspend fun invoke(): ResultOf<BitcoinPrice, CryptoPriceException> =
+                    ResultOf.success(expectedBitcoinPrice())
+            },
+            preferredCurrencyUseCase = object : FakePreferredCurrencyUseCase() {
+                override suspend fun getPreferredCurrencyUseCase(): Flow<String?> =
+                    MutableStateFlow(defaultPreferredCurrency)
+
+                override suspend fun setPreferredCurrencyUseCase(preferredCurrency: String) {
+                    defaultPreferredCurrency = preferredCurrency
+                }
+            }
+        )
+
+        //THEN
+        turbineScope {
+            viewModel.bitcoinInfoUiState.test {
+                skipItems(2) //Skip items initialization
+
+                viewModel.setPreferredCurrency("usd")
+                viewModel.getBitcoinPrice()
+                (awaitItem() as BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo).run {
+                    assertEquals("usd", preferredCurrency)
+                }
+            }
+        }
+    }
 }
 
 private fun expectedBitcoinPrice(): BitcoinPrice =
