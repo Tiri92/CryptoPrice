@@ -3,6 +3,7 @@ package thierry.cryptoprice.bitcoininfo.composables
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -69,25 +70,29 @@ internal fun BitcoinInfoScreen(
 
                 Spacer(modifier = Modifier.width(16.dp))
 
-                Icon(
+                Box(
                     modifier = Modifier
                         .align(Alignment.CenterVertically)
-                        .clickable {
-                            expanded = true
-                        },
-                    imageVector = Icons.Filled.ArrowDropDown,
-                    contentDescription = null
-                )
-            }
+                ) {
+                    Icon(
+                        modifier = Modifier
+                            .clickable {
+                                expanded = true
+                            },
+                        imageVector = Icons.Filled.ArrowDropDown,
+                        contentDescription = null
+                    )
 
-            DropDownMenu(
-                expanded = expanded,
-                onDismiss = {
-                    expanded = false
-                },
-                onCurrencySelected = onCurrencySelected,
-                availableCurrenciesList = uiState.availableCurrenciesList
-            )
+                    DropDownMenu(
+                        expanded = expanded,
+                        onDismiss = {
+                            expanded = false
+                        },
+                        onCurrencySelected = onCurrencySelected,
+                        availableCurrenciesList = uiState.availableCurrenciesList
+                    )
+                }
+            }
         }
     }
 }
