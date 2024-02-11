@@ -18,15 +18,39 @@ data class BitcoinPriceResponse(
 @Serializable
 data class MarketData(
     @SerialName("current_price")
-    val currentPrice: CurrentPrice,
+    val currencyPrices: CurrencyPrices,
     @SerialName("high_24h")
-    val high24h: CurrentPrice,
+    val high24h: CurrencyPrices,
     @SerialName("low_24h")
-    val low24h: CurrentPrice,
+    val low24h: CurrencyPrices,
+    @SerialName("ath")
+    val ath: CurrencyPrices,
+    @SerialName("price_change_percentage_1h_in_currency")
+    val priceChangePercentage1hInCurrency: CurrencyPrices,
+    @SerialName("price_change_percentage_24h_in_currency")
+    val priceChangePercentage24hInCurrency: CurrencyPrices,
+    @SerialName("price_change_percentage_7d_in_currency")
+    val priceChangePercentage7dInCurrency: CurrencyPrices,
+    @SerialName("price_change_percentage_14d_in_currency")
+    val priceChangePercentage14dInCurrency: CurrencyPrices,
+    @SerialName("price_change_percentage_30d_in_currency")
+    val priceChangePercentage30dInCurrency: CurrencyPrices,
+    @SerialName("price_change_percentage_60d_in_currency")
+    val priceChangePercentage60dInCurrency: CurrencyPrices,
+    @SerialName("price_change_percentage_200d_in_currency")
+    val priceChangePercentage200dInCurrency: CurrencyPrices,
+    @SerialName("price_change_percentage_1y_in_currency")
+    val priceChangePercentage1yInCurrency: CurrencyPrices,
+    @SerialName("market_cap_change_percentage_24h_in_currency")
+    val marketCapChangePercentage24hInCurrency: CurrencyPrices,
+    @SerialName("max_supply")
+    val maxSupply: Double,
+    @SerialName("circulating_supply")
+    val circulatingSupply: Double,
 )
 
 @Serializable
-class CurrentPrice(
+class CurrencyPrices(
     @SerialName("eur")
     val eur: Double,
     @SerialName("usd")

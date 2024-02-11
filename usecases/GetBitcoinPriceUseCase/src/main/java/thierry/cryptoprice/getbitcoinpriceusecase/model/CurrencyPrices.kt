@@ -1,6 +1,6 @@
 package thierry.cryptoprice.getbitcoinpriceusecase.model
 
-data class CurrentPrice(
+data class CurrencyPrices(
     val eur: Double,
     val usd: Double,
     val chf: Double,

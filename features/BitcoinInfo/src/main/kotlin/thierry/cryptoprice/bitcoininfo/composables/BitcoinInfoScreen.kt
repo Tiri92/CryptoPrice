@@ -3,8 +3,11 @@ package thierry.cryptoprice.bitcoininfo.composables
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,8 +18,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -31,14 +38,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import thierry.cryptoprice.bitcoininfo.BitcoinInfoViewModel
+import thierry.cryptoprice.bitcoininfo.BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo
+import thierry.cryptoprice.bitcoininfo.BitcoinInfoViewModel.BitcoinInfoUiState.TimeFrame
 import thierry.cryptoprice.bitcoininfo.R
 
+@OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
 internal fun BitcoinInfoScreen(
     onCurrencySelected: (selectedCurrency: String) -> Unit,
     modifier: Modifier = Modifier,
-    uiState: BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo,
+    uiState: BitcoinInfo,
+    onChipSelected: (String) -> Unit,
 ) {
     Column(
         modifier = modifier.padding(16.dp),
@@ -91,16 +101,79 @@ internal fun BitcoinInfoScreen(
                                 expanded = false
                             },
                             onCurrencySelected = onCurrencySelected,
-                            availableCurrenciesList = uiState.availableCurrenciesList
+                            availableCurrenciesList = uiState.availableCurrenciesList,
                         )
                     }
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(text = "Highest price 24h: ${uiState.btcHigh24h} ${uiState.preferredCurrency}")
+                Text(
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally),
+                    text = "Ath: ${uiState.ath} ${uiState.preferredCurrency}"
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally),
+                    text = "Highest price 24h: ${uiState.btcHigh24h} ${uiState.preferredCurrency}"
+                )
 
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "lowest price 24h: ${uiState.btcLow24h} ${uiState.preferredCurrency}")
+                Text(
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally),
+                    text = "lowest price 24h: ${uiState.btcLow24h} ${uiState.preferredCurrency}"
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+                FlowRow(
+                    horizontalArrangement = Arrangement.spacedBy(
+                        16.dp,
+                        Alignment.CenterHorizontally
+                    )
+                ) {
+                    TimeFrame.entries.forEach {
+                        FilterChip(
+                            onClick = {
+                                onChipSelected(it.value)
+                            },
+                            label = {
+                                Text(it.value)
+                            },
+                            selected = it.value == uiState.preferredTimeFrame,
+                            leadingIcon = if (it.value == uiState.preferredTimeFrame) {
+                                {
+                                    Icon(
+                                        imageVector = Icons.Filled.Done,
+                                        contentDescription = "Done icon",
+                                        modifier = Modifier.size(FilterChipDefaults.IconSize)
+                                    )
+                                }
+                            } else {
+                                null
+                            },
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally),
+                    text = when (uiState.preferredTimeFrame) {
+                        TimeFrame.ONE_HOUR.value -> "${uiState.priceChangePercentage1h}%"
+                        TimeFrame.ONE_DAY.value -> "${uiState.priceChangePercentage1d}%"
+                        TimeFrame.ONE_WEEK.value -> "${uiState.priceChangePercentage1w}%"
+                        TimeFrame.TWO_WEEKS.value -> "${uiState.priceChangePercentage2w}%"
+                        TimeFrame.ONE_MONTH.value -> "${uiState.priceChangePercentage1m}%"
+                        TimeFrame.TWO_MONTHS.value -> "${uiState.priceChangePercentage2w}%"
+                        TimeFrame.TWO_HUNDRED_DAYS.value -> "${uiState.priceChangePercentage200d}%"
+                        TimeFrame.ONE_YEAR.value -> "${uiState.priceChangePercentage1y}%"
+                        else -> "${uiState.priceChangePercentage1d}%"
+                    }
+                )
             }
         }
     }
@@ -134,15 +207,25 @@ private fun DropDownMenu(
 fun MainScreenInfoPreview() { //TODO move it to debug folder and how to get Theme ?
     //BitcoinTheme {
     BitcoinInfoScreen(
-        uiState = BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo(
+        uiState = BitcoinInfo(
             availableCurrenciesList = listOf(),
             btcPrice = "500 000",
             preferredCurrency = "eur",
+            ath = "2000000",
             btcName = "Bitcoin",
             btcHigh24h = "1 500 000",
-            btcLow24h = "499 999"
+            priceChangePercentage1h = "100",
+            priceChangePercentage1d = "100",
+            priceChangePercentage1w = "100",
+            priceChangePercentage2w = "100",
+            priceChangePercentage1m = "100",
+            priceChangePercentage2m = "100",
+            priceChangePercentage200d = "100",
+            priceChangePercentage1y = "10000",
+            btcLow24h = "499 999",
         ),
         onCurrencySelected = {},
+        onChipSelected = {},
     )
     // }
 }
