@@ -54,12 +54,16 @@ class BitcoinInfoViewModel @Inject constructor(
 
                         savedStateHandle[BITCOIN_INFO_UI_STATE] =
                             BitcoinInfoUiState.BitcoinInfo(
-                                btcPrice = btcPrice?.get(bitcoinPrice.market_data.current_price)
+                                btcName = bitcoinPrice.name,
+                                btcPrice = btcPrice?.get(bitcoinPrice.market_data.currentPrice)
                                     ?.toString()
-                                    ?: bitcoinPrice.market_data.current_price.eur.toString(),
+                                    ?: bitcoinPrice.market_data.currentPrice.eur.toString(),
+                                btcHigh24h = btcPrice?.get(bitcoinPrice.market_data.high24h)
+                                    .toString(),
+                                btcLow24h = btcPrice?.get(bitcoinPrice.market_data.low24h)
+                                    .toString(),
                                 preferredCurrency = btcPrice?.name ?: "eur",
                                 availableCurrenciesList = availableCurrenciesList,
-                                btcName = bitcoinPrice.name,
                                 isPullToRefreshLoading = false
                             )
                     }
@@ -98,6 +102,8 @@ class BitcoinInfoViewModel @Inject constructor(
         data class BitcoinInfo(
             val btcName: String,
             val btcPrice: String,
+            val btcHigh24h: String,
+            val btcLow24h: String,
             val preferredCurrency: String,
             val availableCurrenciesList: List<String>,
             val isPullToRefreshLoading: Boolean = false,

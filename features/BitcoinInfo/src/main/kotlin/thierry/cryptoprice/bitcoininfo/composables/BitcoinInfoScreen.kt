@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -54,44 +55,52 @@ internal fun BitcoinInfoScreen(
             shadowElevation = 8.dp,
             tonalElevation = 8.dp,
         ) {
-            Row(modifier = Modifier.padding(8.dp)) {
-                Image(
-                    painterResource(id = R.drawable.bitoin_logo),
-                    contentDescription = null,
-                    modifier = Modifier.size(80.dp),
-                )
+            Column(modifier = Modifier.padding(8.dp)) {
+                Row {
+                    Image(
+                        painterResource(id = R.drawable.bitoin_logo),
+                        contentDescription = null,
+                        modifier = Modifier.size(80.dp),
+                    )
 
-                Spacer(modifier = Modifier.width(16.dp))
+                    Spacer(modifier = Modifier.width(16.dp))
 
-                Text(
-                    modifier = Modifier.align(Alignment.CenterVertically),
-                    text = "${uiState.btcName} ${uiState.btcPrice} ${uiState.preferredCurrency}",
-                )
+                    Text(
+                        modifier = Modifier.align(Alignment.CenterVertically),
+                        text = "${uiState.btcName} ${uiState.btcPrice} ${uiState.preferredCurrency}",
+                    )
 
-                Spacer(modifier = Modifier.width(16.dp))
+                    Spacer(modifier = Modifier.width(16.dp))
 
-                Box(
-                    modifier = Modifier
-                        .align(Alignment.CenterVertically)
-                ) {
-                    Icon(
+                    Box(
                         modifier = Modifier
-                            .clickable {
-                                expanded = true
-                            },
-                        imageVector = Icons.Filled.ArrowDropDown,
-                        contentDescription = null
-                    )
+                            .align(Alignment.CenterVertically)
+                    ) {
+                        Icon(
+                            modifier = Modifier
+                                .clickable {
+                                    expanded = true
+                                },
+                            imageVector = Icons.Filled.ArrowDropDown,
+                            contentDescription = null
+                        )
 
-                    DropDownMenu(
-                        expanded = expanded,
-                        onDismiss = {
-                            expanded = false
-                        },
-                        onCurrencySelected = onCurrencySelected,
-                        availableCurrenciesList = uiState.availableCurrenciesList
-                    )
+                        DropDownMenu(
+                            expanded = expanded,
+                            onDismiss = {
+                                expanded = false
+                            },
+                            onCurrencySelected = onCurrencySelected,
+                            availableCurrenciesList = uiState.availableCurrenciesList
+                        )
+                    }
                 }
+
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(text = "Highest price 24h: ${uiState.btcHigh24h} ${uiState.preferredCurrency}")
+
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(text = "lowest price 24h: ${uiState.btcLow24h} ${uiState.preferredCurrency}")
             }
         }
     }
@@ -130,6 +139,8 @@ fun MainScreenInfoPreview() { //TODO move it to debug folder and how to get Them
             btcPrice = "500 000",
             preferredCurrency = "eur",
             btcName = "Bitcoin",
+            btcHigh24h = "1 500 000",
+            btcLow24h = "499 999"
         ),
         onCurrencySelected = {},
     )

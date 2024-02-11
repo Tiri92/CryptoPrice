@@ -1,5 +1,7 @@
 package thierry.cryptoprice.getbitcoinpriceusecase.model
 
 data class MarketData(
-    val current_price: CurrentPrice
+    val currentPrice: CurrentPrice,
+    val high24h: CurrentPrice,
+    val low24h: CurrentPrice,
 )

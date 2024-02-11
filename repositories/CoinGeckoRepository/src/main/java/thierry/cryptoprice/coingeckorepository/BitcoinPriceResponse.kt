@@ -18,7 +18,11 @@ data class BitcoinPriceResponse(
 @Serializable
 data class MarketData(
     @SerialName("current_price")
-    val currentPrice: CurrentPrice
+    val currentPrice: CurrentPrice,
+    @SerialName("high_24h")
+    val high24h: CurrentPrice,
+    @SerialName("low_24h")
+    val low24h: CurrentPrice,
 )
 
 @Serializable
