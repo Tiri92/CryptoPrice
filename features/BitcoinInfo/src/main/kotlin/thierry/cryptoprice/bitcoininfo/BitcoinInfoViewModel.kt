@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import thierry.cryptoprice.bitcoininfo.BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo
 import thierry.cryptoprice.bitcoininfo.BitcoinInfoViewModel.BitcoinInfoUiState.Error
@@ -210,7 +211,31 @@ class BitcoinInfoViewModel @Inject constructor(
             val preferredCurrency: String,
             val availableCurrenciesList: List<String>,
             val isPullToRefreshLoading: Boolean = false,
-        ) : BitcoinInfoUiState
+        ) : BitcoinInfoUiState {
+            @IgnoredOnParcel
+            val isPriceChangePercentage1hPositive = priceChangePercentage1h.toDouble() >= 0
+
+            @IgnoredOnParcel
+            val isPriceChangePercentage1dPositive = priceChangePercentage1d.toDouble() >= 0
+
+            @IgnoredOnParcel
+            val isPriceChangePercentage1wPositive = priceChangePercentage1w.toDouble() >= 0
+
+            @IgnoredOnParcel
+            val isPriceChangePercentage2wPositive = priceChangePercentage2w.toDouble() >= 0
+
+            @IgnoredOnParcel
+            val isPriceChangePercentage1mPositive = priceChangePercentage1m.toDouble() >= 0
+
+            @IgnoredOnParcel
+            val isPriceChangePercentage2mPositive = priceChangePercentage2m.toDouble() >= 0
+
+            @IgnoredOnParcel
+            val isPriceChangePercentage200dPositive = priceChangePercentage200d.toDouble() >= 0
+
+            @IgnoredOnParcel
+            val isPriceChangePercentage1yPositive = priceChangePercentage1y.toDouble() >= 0
+        }
 
         @Immutable
         @Parcelize

@@ -107,25 +107,67 @@ internal fun BitcoinInfoScreen(
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(
+                Row(
                     modifier = Modifier
-                        .align(Alignment.CenterHorizontally),
-                    text = "Ath: ${uiState.ath} ${uiState.preferredCurrency}"
-                )
+                        .align(Alignment.CenterHorizontally)
+                ) {
+                    Text(
+                        text = "Ath:",
+                    )
+
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = uiState.ath,
+                        color = Color.Green,
+                    )
+
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = uiState.preferredCurrency,
+                    )
+                }
 
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(
+                Row(
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally),
-                    text = "Highest price 24h: ${uiState.btcHigh24h} ${uiState.preferredCurrency}"
-                )
+                ) {
+                    Text(
+                        text = "Highest price 24h:",
+                    )
+
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = uiState.btcHigh24h,
+                        color = Color.Green,
+                    )
+
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = uiState.preferredCurrency,
+                    )
+                }
 
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(
+                Row(
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally),
-                    text = "lowest price 24h: ${uiState.btcLow24h} ${uiState.preferredCurrency}"
-                )
+                ) {
+                    Text(
+                        text = "lowest price 24h:",
+                    )
+
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = uiState.btcLow24h,
+                        color = Color.Red,
+                    )
+
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = uiState.preferredCurrency,
+                    )
+                }
 
                 Spacer(modifier = Modifier.height(16.dp))
                 FlowRow(
@@ -168,10 +210,57 @@ internal fun BitcoinInfoScreen(
                         TimeFrame.ONE_WEEK.value -> "${uiState.priceChangePercentage1w}%"
                         TimeFrame.TWO_WEEKS.value -> "${uiState.priceChangePercentage2w}%"
                         TimeFrame.ONE_MONTH.value -> "${uiState.priceChangePercentage1m}%"
-                        TimeFrame.TWO_MONTHS.value -> "${uiState.priceChangePercentage2w}%"
+                        TimeFrame.TWO_MONTHS.value -> "${uiState.priceChangePercentage2m}%"
                         TimeFrame.TWO_HUNDRED_DAYS.value -> "${uiState.priceChangePercentage200d}%"
                         TimeFrame.ONE_YEAR.value -> "${uiState.priceChangePercentage1y}%"
                         else -> "${uiState.priceChangePercentage1d}%"
+                    },
+                    color = when (uiState.preferredTimeFrame) {
+                        TimeFrame.ONE_HOUR.value -> if (uiState.isPriceChangePercentage1hPositive)
+                            Color.Green
+                        else
+                            Color.Red
+
+                        TimeFrame.ONE_DAY.value -> if (uiState.isPriceChangePercentage1dPositive)
+                            Color.Green
+                        else
+                            Color.Red
+
+                        TimeFrame.ONE_WEEK.value -> if (uiState.isPriceChangePercentage1wPositive)
+                            Color.Green
+                        else
+                            Color.Red
+
+                        TimeFrame.TWO_WEEKS.value -> if (uiState.isPriceChangePercentage2wPositive)
+                            Color.Green
+                        else
+                            Color.Red
+
+                        TimeFrame.ONE_MONTH.value -> if (uiState.isPriceChangePercentage1mPositive)
+                            Color.Green
+                        else
+                            Color.Red
+
+                        TimeFrame.TWO_MONTHS.value -> if (uiState.isPriceChangePercentage2mPositive)
+                            Color.Green
+                        else
+                            Color.Red
+
+                        TimeFrame.TWO_HUNDRED_DAYS.value -> if (uiState.isPriceChangePercentage200dPositive)
+                            Color.Green
+                        else
+                            Color.Red
+
+                        TimeFrame.ONE_YEAR.value -> if (uiState.isPriceChangePercentage1yPositive)
+                            Color.Green
+                        else
+                            Color.Red
+
+                        else -> if (uiState.isPriceChangePercentage1dPositive)
+                            Color.Green
+                        else
+                            Color.Red
+
                     }
                 )
             }
