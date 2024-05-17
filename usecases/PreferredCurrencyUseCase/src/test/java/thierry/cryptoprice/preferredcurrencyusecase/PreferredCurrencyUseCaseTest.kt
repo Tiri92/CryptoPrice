@@ -23,7 +23,7 @@ class PreferredCurrencyUseCaseTest {
                 })
 
             //WHEN
-            val result = preferredCurrencyUseCase.getPreferredCurrencyUseCase()
+            val result = preferredCurrencyUseCase.getPreferredCurrency()
 
             //THEN
             turbineScope {
@@ -44,7 +44,7 @@ class PreferredCurrencyUseCaseTest {
             })
 
         //WHEN
-        val result = preferredCurrencyUseCase.getPreferredCurrencyUseCase()
+        val result = preferredCurrencyUseCase.getPreferredCurrency()
 
         //THEN
         turbineScope {
@@ -71,8 +71,8 @@ class PreferredCurrencyUseCaseTest {
                 })
 
             //WHEN
-            preferredCurrencyUseCase.setPreferredCurrencyUseCase("usd")
-            val result = preferredCurrencyUseCase.getPreferredCurrencyUseCase()
+            preferredCurrencyUseCase.setPreferredCurrency("usd")
+            val result = preferredCurrencyUseCase.getPreferredCurrency()
 
             //THEN
             turbineScope {

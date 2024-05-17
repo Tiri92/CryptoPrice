@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
@@ -18,6 +20,7 @@ import thierry.cryptoprice.bitcoininfo.BitcoinInfoViewModel.BitcoinInfoUiState.T
 import thierry.cryptoprice.getbitcoinpriceusecase.GetBitcoinPriceUseCase
 import thierry.cryptoprice.getbitcoinpriceusecase.model.CurrencyPrices
 import thierry.cryptoprice.preferredcurrencyusecase.PreferredCurrencyUseCase
+import thierry.cryptoprice.preferredcurrencyusecase.PreferredTimeFrameUseCase
 import thierry.cryptoprice.resultof.mapFailure
 import thierry.cryptoprice.resultof.mapSuccess
 import javax.inject.Inject
@@ -31,6 +34,7 @@ class BitcoinInfoViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val getBitcoinPriceUseCase: GetBitcoinPriceUseCase,
     private val preferredCurrencyUseCase: PreferredCurrencyUseCase,
+    private val preferredTimeFrameUseCase: PreferredTimeFrameUseCase,
 ) : ViewModel() {
 
     val bitcoinInfoUiState: StateFlow<BitcoinInfoUiState> = savedStateHandle.getStateFlow(
@@ -45,13 +49,18 @@ class BitcoinInfoViewModel @Inject constructor(
     @VisibleForTesting
     fun getBitcoinPrice() =
         viewModelScope.launch {
-            getBitcoinPriceUseCase().mapSuccess { bitcoinPrice ->
-                preferredCurrencyUseCase.getPreferredCurrencyUseCase()
-                    .collect { preferredCurrency: String? ->
+            //Rename le module du UseCase à la fin PreferredCurrencyUseCase en plus générique genre UserPreferences TODO
 
-                        val btcPrice = CurrencyPrices::class.memberProperties.find { predicate ->
-                            preferredCurrency == predicate.name
-                        }
+            getBitcoinPriceUseCase().mapSuccess { bitcoinPrice ->
+                preferredTimeFrameUseCase.getPreferredTimeFrame()
+                    .combine(
+                        preferredCurrencyUseCase.getPreferredCurrency()
+                    ) { preferredTimeFrame, preferredCurrency ->
+
+                        val btcPrice =
+                            CurrencyPrices::class.memberProperties.find { predicate ->
+                                preferredCurrency == predicate.name
+                            }
 
                         val availableCurrenciesList = mutableListOf<String>()
                         CurrencyPrices::class.memberProperties.forEach { currentPrice ->
@@ -113,10 +122,12 @@ class BitcoinInfoViewModel @Inject constructor(
                                 )?.toString()
                                     ?: bitcoinPrice.marketData.priceChangePercentage1yInCurrency.eur.toString(),
                                 preferredCurrency = btcPrice?.name ?: DEFAULT_CURRENCY,
+                                preferredTimeFrame = preferredTimeFrame
+                                    ?: TimeFrame.ONE_DAY.value,
                                 availableCurrenciesList = availableCurrenciesList,
                                 isPullToRefreshLoading = false,
                             )
-                    }
+                    }.stateIn(viewModelScope)
             }.mapFailure {
                 savedStateHandle[BITCOIN_INFO_UI_STATE] =
                     Error
@@ -138,52 +149,13 @@ class BitcoinInfoViewModel @Inject constructor(
 
     internal fun setPreferredCurrency(preferredCurrency: String) =
         viewModelScope.launch {
-            preferredCurrencyUseCase.setPreferredCurrencyUseCase(preferredCurrency)
+            preferredCurrencyUseCase.setPreferredCurrency(preferredCurrency)
         }
 
-    internal fun onChipSelected(ship: String) { //Verify datastore to enable a ship on init if there is a user preference TODO
-        when (ship) {
-            TimeFrame.ONE_HOUR.value -> savedStateHandle[BITCOIN_INFO_UI_STATE] =
-                (bitcoinInfoUiState.value as BitcoinInfo).copy(
-                    preferredTimeFrame = TimeFrame.ONE_HOUR.value,
-                )
-
-            TimeFrame.ONE_DAY.value -> savedStateHandle[BITCOIN_INFO_UI_STATE] =
-                (bitcoinInfoUiState.value as BitcoinInfo).copy(
-                    preferredTimeFrame = TimeFrame.ONE_DAY.value,
-                )
-
-            TimeFrame.ONE_WEEK.value -> savedStateHandle[BITCOIN_INFO_UI_STATE] =
-                (bitcoinInfoUiState.value as BitcoinInfo).copy(
-                    preferredTimeFrame = TimeFrame.ONE_WEEK.value,
-                )
-
-            TimeFrame.TWO_WEEKS.value -> savedStateHandle[BITCOIN_INFO_UI_STATE] =
-                (bitcoinInfoUiState.value as BitcoinInfo).copy(
-                    preferredTimeFrame = TimeFrame.TWO_WEEKS.value,
-                )
-
-            TimeFrame.ONE_MONTH.value -> savedStateHandle[BITCOIN_INFO_UI_STATE] =
-                (bitcoinInfoUiState.value as BitcoinInfo).copy(
-                    preferredTimeFrame = TimeFrame.ONE_MONTH.value,
-                )
-
-            TimeFrame.TWO_MONTHS.value -> savedStateHandle[BITCOIN_INFO_UI_STATE] =
-                (bitcoinInfoUiState.value as BitcoinInfo).copy(
-                    preferredTimeFrame = TimeFrame.TWO_MONTHS.value,
-                )
-
-            TimeFrame.TWO_HUNDRED_DAYS.value -> savedStateHandle[BITCOIN_INFO_UI_STATE] =
-                (bitcoinInfoUiState.value as BitcoinInfo).copy(
-                    preferredTimeFrame = TimeFrame.TWO_HUNDRED_DAYS.value,
-                )
-
-            TimeFrame.ONE_YEAR.value -> savedStateHandle[BITCOIN_INFO_UI_STATE] =
-                (bitcoinInfoUiState.value as BitcoinInfo).copy(
-                    preferredTimeFrame = TimeFrame.ONE_YEAR.value,
-                )
+    internal fun onTimeFrameSelected(selectedTimeFrame: String) =
+        viewModelScope.launch {
+            preferredTimeFrameUseCase.setPreferredTimeFrame(selectedTimeFrame)
         }
-    }
 
     sealed interface BitcoinInfoUiState : Parcelable {
 

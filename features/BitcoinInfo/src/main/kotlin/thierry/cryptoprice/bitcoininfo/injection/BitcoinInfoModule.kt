@@ -8,6 +8,8 @@ import thierry.cryptoprice.getbitcoinpriceusecase.GetBitcoinPriceUseCase
 import thierry.cryptoprice.getbitcoinpriceusecase.GetBitcoinPriceUseCaseImpl
 import thierry.cryptoprice.preferredcurrencyusecase.PreferredCurrencyUseCase
 import thierry.cryptoprice.preferredcurrencyusecase.PreferredCurrencyUseCaseImpl
+import thierry.cryptoprice.preferredcurrencyusecase.PreferredTimeFrameUseCase
+import thierry.cryptoprice.preferredcurrencyusecase.PreferredTimeFrameUseCaseImpl
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -17,4 +19,7 @@ interface BitcoinInfoModule {
 
     @Binds
     fun providePreferredCurrencyUseCase(impl: PreferredCurrencyUseCaseImpl): PreferredCurrencyUseCase
+
+    @Binds
+    fun providePreferredTimeFrameUseCase(impl: PreferredTimeFrameUseCaseImpl): PreferredTimeFrameUseCase
 }

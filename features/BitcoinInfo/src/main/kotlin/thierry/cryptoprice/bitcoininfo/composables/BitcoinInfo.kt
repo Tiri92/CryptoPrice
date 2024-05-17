@@ -45,7 +45,7 @@ internal fun BitcoinInfo(
                         ),
                     uiState = uiState,
                     onCurrencySelected = viewModel::setPreferredCurrency,
-                    onChipSelected = viewModel::onChipSelected,
+                    onChipSelected = viewModel::onTimeFrameSelected,
                 )
 
                 PullRefreshIndicator(

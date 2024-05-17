@@ -13,8 +13,13 @@ import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import thierry.cryptoprice.bitcoininfo.BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo
+import thierry.cryptoprice.bitcoininfo.BitcoinInfoViewModel.BitcoinInfoUiState.Error
+import thierry.cryptoprice.bitcoininfo.BitcoinInfoViewModel.BitcoinInfoUiState.Loading
+import thierry.cryptoprice.bitcoininfo.BitcoinInfoViewModel.BitcoinInfoUiState.TimeFrame
 import thierry.cryptoprice.bitcoininfo.fake.FakeGetBitcoinPriceUseCase
 import thierry.cryptoprice.bitcoininfo.fake.FakePreferredCurrencyUseCase
+import thierry.cryptoprice.bitcoininfo.fake.FakePreferredTimeFrameUseCase
 import thierry.cryptoprice.getbitcoinpriceusecase.model.BitcoinPrice
 import thierry.cryptoprice.getbitcoinpriceusecase.model.CryptoPriceException
 import thierry.cryptoprice.getbitcoinpriceusecase.model.CurrencyPrices
@@ -48,16 +53,20 @@ class BitcoinInfoViewModelTest {
                     ResultOf.success(expectedBitcoinPrice())
             },
             preferredCurrencyUseCase = object : FakePreferredCurrencyUseCase() {
-                override suspend fun getPreferredCurrencyUseCase(): Flow<String?> =
+                override suspend fun getPreferredCurrency(): Flow<String?> =
                     MutableStateFlow("")
-            }
+            },
+            preferredTimeFrameUseCase = object : FakePreferredTimeFrameUseCase() {
+                override suspend fun getPreferredTimeFrame(): Flow<String?> =
+                    MutableStateFlow("")
+            },
         )
 
         //THEN
         turbineScope {
             viewModel.bitcoinInfoUiState.test {
-                assertIs<BitcoinInfoViewModel.BitcoinInfoUiState.Loading>(awaitItem())
-                assertIs<BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo>(awaitItem())
+                assertIs<Loading>(awaitItem())
+                assertIs<BitcoinInfo>(awaitItem())
             }
         }
     }
@@ -72,16 +81,20 @@ class BitcoinInfoViewModelTest {
                     ResultOf.failure(CryptoPriceException.GenericPriceException)
             },
             preferredCurrencyUseCase = object : FakePreferredCurrencyUseCase() {
-                override suspend fun getPreferredCurrencyUseCase(): Flow<String?> =
+                override suspend fun getPreferredCurrency(): Flow<String?> =
                     MutableStateFlow("")
-            }
+            },
+            preferredTimeFrameUseCase = object : FakePreferredTimeFrameUseCase() {
+                override suspend fun getPreferredTimeFrame(): Flow<String?> =
+                    MutableStateFlow("")
+            },
         )
 
         //THEN
         turbineScope {
             viewModel.bitcoinInfoUiState.test {
-                assertIs<BitcoinInfoViewModel.BitcoinInfoUiState.Loading>(awaitItem())
-                assertIs<BitcoinInfoViewModel.BitcoinInfoUiState.Error>(awaitItem())
+                assertIs<Loading>(awaitItem())
+                assertIs<Error>(awaitItem())
             }
         }
     }
@@ -96,9 +109,13 @@ class BitcoinInfoViewModelTest {
                     ResultOf.success(expectedBitcoinPrice())
             },
             preferredCurrencyUseCase = object : FakePreferredCurrencyUseCase() {
-                override suspend fun getPreferredCurrencyUseCase(): Flow<String?> =
+                override suspend fun getPreferredCurrency(): Flow<String?> =
                     MutableStateFlow("")
-            }
+            },
+            preferredTimeFrameUseCase = object : FakePreferredTimeFrameUseCase() {
+                override suspend fun getPreferredTimeFrame(): Flow<String?> =
+                    MutableStateFlow("")
+            },
         )
 
         //THEN
@@ -107,8 +124,8 @@ class BitcoinInfoViewModelTest {
                 skipItems(2) //Skip initialization call for getBitcoinPrice
                 viewModel.retryGetBitcoinPrice()
 
-                assertIs<BitcoinInfoViewModel.BitcoinInfoUiState.Loading>(awaitItem())
-                assertIs<BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo>(awaitItem())
+                assertIs<Loading>(awaitItem())
+                assertIs<BitcoinInfo>(awaitItem())
             }
         }
     }
@@ -123,9 +140,13 @@ class BitcoinInfoViewModelTest {
                     ResultOf.success(expectedBitcoinPrice())
             },
             preferredCurrencyUseCase = object : FakePreferredCurrencyUseCase() {
-                override suspend fun getPreferredCurrencyUseCase(): Flow<String?> =
+                override suspend fun getPreferredCurrency(): Flow<String?> =
                     MutableStateFlow("")
-            }
+            },
+            preferredTimeFrameUseCase = object : FakePreferredTimeFrameUseCase() {
+                override suspend fun getPreferredTimeFrame(): Flow<String?> =
+                    MutableStateFlow("")
+            },
         )
 
         //THEN
@@ -136,9 +157,9 @@ class BitcoinInfoViewModelTest {
 
                 assertEquals(
                     true,
-                    (awaitItem() as BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo).isPullToRefreshLoading
+                    (awaitItem() as BitcoinInfo).isPullToRefreshLoading
                 )
-                (awaitItem() as BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo).run {
+                (awaitItem() as BitcoinInfo).run {
                     assertEquals("Bitcoin", btcName)
                     assertEquals("1000000.0", btcPrice)
                     assertEquals(false, isPullToRefreshLoading)
@@ -157,18 +178,53 @@ class BitcoinInfoViewModelTest {
                     ResultOf.success(expectedBitcoinPrice())
             },
             preferredCurrencyUseCase = object : FakePreferredCurrencyUseCase() {
-                override suspend fun getPreferredCurrencyUseCase(): Flow<String?> =
+                override suspend fun getPreferredCurrency(): Flow<String?> =
                     MutableStateFlow("usd")
-            }
+            },
+            preferredTimeFrameUseCase = object : FakePreferredTimeFrameUseCase() {
+                override suspend fun getPreferredTimeFrame(): Flow<String?> =
+                    MutableStateFlow("")
+            },
         )
 
         //THEN
         turbineScope {
             viewModel.bitcoinInfoUiState.test {
-                assertIs<BitcoinInfoViewModel.BitcoinInfoUiState.Loading>(awaitItem())
+                assertIs<Loading>(awaitItem())
                 assertEquals(
                     "usd",
-                    (awaitItem() as BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo).preferredCurrency
+                    (awaitItem() as BitcoinInfo).preferredCurrency
+                )
+            }
+        }
+    }
+
+    @Test
+    fun `Should return preferredTimeFrame when preferredTimeFrameUseCase succeeded`() = runTest {
+        //WHEN
+        viewModel = BitcoinInfoViewModel(
+            savedStateHandle = savedStateHandle,
+            getBitcoinPriceUseCase = object : FakeGetBitcoinPriceUseCase() {
+                override suspend fun invoke(): ResultOf<BitcoinPrice, CryptoPriceException> =
+                    ResultOf.success(expectedBitcoinPrice())
+            },
+            preferredCurrencyUseCase = object : FakePreferredCurrencyUseCase() {
+                override suspend fun getPreferredCurrency(): Flow<String?> =
+                    MutableStateFlow("usd")
+            },
+            preferredTimeFrameUseCase = object : FakePreferredTimeFrameUseCase() {
+                override suspend fun getPreferredTimeFrame(): Flow<String?> =
+                    MutableStateFlow(TimeFrame.TWO_WEEKS.value)
+            },
+        )
+
+        //THEN
+        turbineScope {
+            viewModel.bitcoinInfoUiState.test {
+                assertIs<Loading>(awaitItem())
+                assertEquals(
+                    TimeFrame.TWO_WEEKS.value,
+                    (awaitItem() as BitcoinInfo).preferredTimeFrame
                 )
             }
         }
@@ -184,18 +240,53 @@ class BitcoinInfoViewModelTest {
                     ResultOf.success(expectedBitcoinPrice())
             },
             preferredCurrencyUseCase = object : FakePreferredCurrencyUseCase() {
-                override suspend fun getPreferredCurrencyUseCase(): Flow<String?> =
+                override suspend fun getPreferredCurrency(): Flow<String?> =
                     MutableStateFlow(null)
-            }
+            },
+            preferredTimeFrameUseCase = object : FakePreferredTimeFrameUseCase() {
+                override suspend fun getPreferredTimeFrame(): Flow<String?> =
+                    MutableStateFlow("")
+            },
         )
 
         //THEN
         turbineScope {
             viewModel.bitcoinInfoUiState.test {
-                assertIs<BitcoinInfoViewModel.BitcoinInfoUiState.Loading>(awaitItem())
+                assertIs<Loading>(awaitItem())
                 assertEquals(
                     "eur",
-                    (awaitItem() as BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo).preferredCurrency
+                    (awaitItem() as BitcoinInfo).preferredCurrency
+                )
+            }
+        }
+    }
+
+    @Test
+    fun `Should return defaultTimeFrame when preferredTimeFrameUseCase return null`() = runTest {
+        //WHEN
+        viewModel = BitcoinInfoViewModel(
+            savedStateHandle = savedStateHandle,
+            getBitcoinPriceUseCase = object : FakeGetBitcoinPriceUseCase() {
+                override suspend fun invoke(): ResultOf<BitcoinPrice, CryptoPriceException> =
+                    ResultOf.success(expectedBitcoinPrice())
+            },
+            preferredCurrencyUseCase = object : FakePreferredCurrencyUseCase() {
+                override suspend fun getPreferredCurrency(): Flow<String?> =
+                    MutableStateFlow(null)
+            },
+            preferredTimeFrameUseCase = object : FakePreferredTimeFrameUseCase() {
+                override suspend fun getPreferredTimeFrame(): Flow<String?> =
+                    MutableStateFlow(null)
+            },
+        )
+
+        //THEN
+        turbineScope {
+            viewModel.bitcoinInfoUiState.test {
+                assertIs<Loading>(awaitItem())
+                assertEquals(
+                    TimeFrame.ONE_DAY.value,
+                    (awaitItem() as BitcoinInfo).preferredTimeFrame
                 )
             }
         }
@@ -212,13 +303,17 @@ class BitcoinInfoViewModelTest {
                     ResultOf.success(expectedBitcoinPrice())
             },
             preferredCurrencyUseCase = object : FakePreferredCurrencyUseCase() {
-                override suspend fun getPreferredCurrencyUseCase(): Flow<String?> =
+                override suspend fun getPreferredCurrency(): Flow<String?> =
                     MutableStateFlow(defaultPreferredCurrency)
 
-                override suspend fun setPreferredCurrencyUseCase(preferredCurrency: String) {
+                override suspend fun setPreferredCurrency(preferredCurrency: String) {
                     defaultPreferredCurrency = preferredCurrency
                 }
-            }
+            },
+            preferredTimeFrameUseCase = object : FakePreferredTimeFrameUseCase() {
+                override suspend fun getPreferredTimeFrame(): Flow<String?> =
+                    MutableStateFlow("")
+            },
         )
 
         //THEN
@@ -228,8 +323,47 @@ class BitcoinInfoViewModelTest {
 
                 viewModel.setPreferredCurrency("usd")
                 viewModel.getBitcoinPrice()
-                (awaitItem() as BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo).run {
+                (awaitItem() as BitcoinInfo).run {
                     assertEquals("usd", preferredCurrency)
+                }
+            }
+        }
+    }
+
+    @Test
+    fun `Should update defaultTimeFrame when setPreferredTimeFrameUseCase is called`() = runTest {
+        //WHEN
+        var defaultPreferredTimeFrame = TimeFrame.ONE_DAY.value
+
+        viewModel = BitcoinInfoViewModel(
+            savedStateHandle = savedStateHandle,
+            getBitcoinPriceUseCase = object : FakeGetBitcoinPriceUseCase() {
+                override suspend fun invoke(): ResultOf<BitcoinPrice, CryptoPriceException> =
+                    ResultOf.success(expectedBitcoinPrice())
+            },
+            preferredCurrencyUseCase = object : FakePreferredCurrencyUseCase() {
+                override suspend fun getPreferredCurrency(): Flow<String?> =
+                    MutableStateFlow(null)
+            },
+            preferredTimeFrameUseCase = object : FakePreferredTimeFrameUseCase() {
+                override suspend fun getPreferredTimeFrame(): Flow<String?> =
+                    MutableStateFlow(defaultPreferredTimeFrame)
+
+                override suspend fun setPreferredTimeFrame(preferredTimeFrame: String) {
+                    defaultPreferredTimeFrame = preferredTimeFrame
+                }
+            },
+        )
+
+        //THEN
+        turbineScope {
+            viewModel.bitcoinInfoUiState.test {
+                skipItems(2) //Skip items initialization
+
+                viewModel.onTimeFrameSelected(TimeFrame.TWO_WEEKS.value)
+                viewModel.getBitcoinPrice()
+                (awaitItem() as BitcoinInfo).run {
+                    assertEquals(TimeFrame.TWO_WEEKS.value, preferredTimeFrame)
                 }
             }
         }

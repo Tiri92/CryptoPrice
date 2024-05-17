@@ -15,7 +15,7 @@ import javax.inject.Inject
 private const val PREFERRED_CURRENCY_DATASTORE = "PreferredCurrencyDataStore"
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = PREFERRED_CURRENCY_DATASTORE)
 
-class PreferredCurrencyDataStoreRepositoryImpl @Inject constructor(
+class PreferredCurrencyDataStoreRepositoryImpl @Inject constructor( // TODO Add test
     @ApplicationContext private val context: Context
 ) : PreferredCurrencyDataStoreRepository {
 

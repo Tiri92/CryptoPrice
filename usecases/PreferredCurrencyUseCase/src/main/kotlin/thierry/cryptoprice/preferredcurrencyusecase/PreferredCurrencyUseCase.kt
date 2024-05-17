@@ -4,18 +4,18 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 interface PreferredCurrencyUseCase {
-    suspend fun getPreferredCurrencyUseCase(): Flow<String?>
+    suspend fun getPreferredCurrency(): Flow<String?>
 
-    suspend fun setPreferredCurrencyUseCase(preferredCurrency: String)
+    suspend fun setPreferredCurrency(preferredCurrency: String)
 }
 
 class PreferredCurrencyUseCaseImpl @Inject constructor(
     private val preferredCurrencyDataStoreRepository: PreferredCurrencyDataStoreRepository,
 ) : PreferredCurrencyUseCase {
-    override suspend fun getPreferredCurrencyUseCase(): Flow<String?> =
+    override suspend fun getPreferredCurrency(): Flow<String?> =
         preferredCurrencyDataStoreRepository.getPreferredCurrency()
 
-    override suspend fun setPreferredCurrencyUseCase(preferredCurrency: String) =
+    override suspend fun setPreferredCurrency(preferredCurrency: String) =
         preferredCurrencyDataStoreRepository.setPreferredCurrency(
             preferredCurrency
         )
