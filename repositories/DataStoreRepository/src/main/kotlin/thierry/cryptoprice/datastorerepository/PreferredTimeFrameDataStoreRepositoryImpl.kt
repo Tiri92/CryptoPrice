@@ -9,7 +9,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import thierry.cryptoprice.preferredcurrencyusecase.PreferredTimeFrameDataStoreRepository
+import thierry.cryptoprice.userpreferences.PreferredTimeFrameDataStoreRepository
 import javax.inject.Inject
 
 private const val PREFERRED_TIMEFRAME_DATASTORE = "PreferredTimeFrameDataStore"

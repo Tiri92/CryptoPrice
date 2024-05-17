@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import thierry.cryptoprice.preferredcurrencyusecase.fake.FakePreferredTimeFrameDataStoreRepository
+import thierry.cryptoprice.userpreferences.PreferredTimeFrameUseCaseImpl
 import kotlin.test.assertEquals
 
 class PreferredTimeFrameUseCaseTest {

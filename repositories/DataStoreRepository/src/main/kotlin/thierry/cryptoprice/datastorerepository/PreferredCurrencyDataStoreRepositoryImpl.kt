@@ -9,7 +9,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import thierry.cryptoprice.preferredcurrencyusecase.PreferredCurrencyDataStoreRepository
+import thierry.cryptoprice.userpreferences.PreferredCurrencyDataStoreRepository
 import javax.inject.Inject
 
 private const val PREFERRED_CURRENCY_DATASTORE = "PreferredCurrencyDataStore"

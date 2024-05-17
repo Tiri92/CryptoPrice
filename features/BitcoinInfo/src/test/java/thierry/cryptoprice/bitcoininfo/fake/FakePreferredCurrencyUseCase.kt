@@ -1,7 +1,7 @@
 package thierry.cryptoprice.bitcoininfo.fake
 
 import kotlinx.coroutines.flow.Flow
-import thierry.cryptoprice.preferredcurrencyusecase.PreferredCurrencyUseCase
+import thierry.cryptoprice.userpreferences.PreferredCurrencyUseCase
 
 open class FakePreferredCurrencyUseCase: PreferredCurrencyUseCase {
     override suspend fun getPreferredCurrency(): Flow<String?> {

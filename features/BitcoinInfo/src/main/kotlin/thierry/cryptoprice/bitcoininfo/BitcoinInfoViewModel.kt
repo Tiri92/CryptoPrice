@@ -19,8 +19,8 @@ import thierry.cryptoprice.bitcoininfo.BitcoinInfoViewModel.BitcoinInfoUiState.L
 import thierry.cryptoprice.bitcoininfo.BitcoinInfoViewModel.BitcoinInfoUiState.TimeFrame
 import thierry.cryptoprice.getbitcoinpriceusecase.GetBitcoinPriceUseCase
 import thierry.cryptoprice.getbitcoinpriceusecase.model.CurrencyPrices
-import thierry.cryptoprice.preferredcurrencyusecase.PreferredCurrencyUseCase
-import thierry.cryptoprice.preferredcurrencyusecase.PreferredTimeFrameUseCase
+import thierry.cryptoprice.userpreferences.PreferredCurrencyUseCase
+import thierry.cryptoprice.userpreferences.PreferredTimeFrameUseCase
 import thierry.cryptoprice.resultof.mapFailure
 import thierry.cryptoprice.resultof.mapSuccess
 import javax.inject.Inject
@@ -49,9 +49,8 @@ class BitcoinInfoViewModel @Inject constructor(
     @VisibleForTesting
     fun getBitcoinPrice() =
         viewModelScope.launch {
-            //Rename le module du UseCase à la fin PreferredCurrencyUseCase en plus générique genre UserPreferences TODO
-
             getBitcoinPriceUseCase().mapSuccess { bitcoinPrice ->
+
                 preferredTimeFrameUseCase.getPreferredTimeFrame()
                     .combine(
                         preferredCurrencyUseCase.getPreferredCurrency()

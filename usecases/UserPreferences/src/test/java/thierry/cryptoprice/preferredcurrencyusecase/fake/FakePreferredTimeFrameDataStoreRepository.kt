@@ -1,7 +1,7 @@
 package thierry.cryptoprice.preferredcurrencyusecase.fake
 
 import kotlinx.coroutines.flow.Flow
-import thierry.cryptoprice.preferredcurrencyusecase.PreferredTimeFrameDataStoreRepository
+import thierry.cryptoprice.userpreferences.PreferredTimeFrameDataStoreRepository
 
 open class FakePreferredTimeFrameDataStoreRepository: PreferredTimeFrameDataStoreRepository {
     override suspend fun getPreferredTimeFrame(): Flow<String?> {

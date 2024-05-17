@@ -1,4 +1,4 @@
-package thierry.cryptoprice.preferredcurrencyusecase
+package thierry.cryptoprice.userpreferences
 
 import kotlinx.coroutines.flow.Flow
 

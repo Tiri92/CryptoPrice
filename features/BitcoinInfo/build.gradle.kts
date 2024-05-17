@@ -24,9 +24,9 @@ dependencies {
 
     implementation(libs.bundles.compose)
 
-    implementation(projects.usecases.getBitcoinPriceUseCase)
-    implementation(projects.usecases.preferredCurrencyUseCase)
     implementation(projects.libraries.resultOf)
+    implementation(projects.usecases.getBitcoinPriceUseCase)
+    implementation(projects.usecases.userPreferences)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinTest)

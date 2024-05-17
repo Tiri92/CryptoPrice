@@ -4,8 +4,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import thierry.cryptoprice.preferredcurrencyusecase.PreferredCurrencyDataStoreRepository
-import thierry.cryptoprice.preferredcurrencyusecase.PreferredTimeFrameDataStoreRepository
+import thierry.cryptoprice.userpreferences.PreferredCurrencyDataStoreRepository
+import thierry.cryptoprice.userpreferences.PreferredTimeFrameDataStoreRepository
 
 @Module
 @InstallIn(SingletonComponent::class)

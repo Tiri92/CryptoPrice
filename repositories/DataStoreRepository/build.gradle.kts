@@ -12,7 +12,7 @@ dependencies {
     implementation(libs.dataStore)
     implementation(libs.javaxInject)
 
-    implementation(projects.usecases.preferredCurrencyUseCase)
+    implementation(projects.usecases.userPreferences)
 
     testImplementation(libs.junit)
 }

@@ -1,7 +1,7 @@
 package thierry.cryptoprice.bitcoininfo.fake
 
 import kotlinx.coroutines.flow.Flow
-import thierry.cryptoprice.preferredcurrencyusecase.PreferredTimeFrameUseCase
+import thierry.cryptoprice.userpreferences.PreferredTimeFrameUseCase
 
 open class FakePreferredTimeFrameUseCase : PreferredTimeFrameUseCase {
     override suspend fun getPreferredTimeFrame(): Flow<String?> {
