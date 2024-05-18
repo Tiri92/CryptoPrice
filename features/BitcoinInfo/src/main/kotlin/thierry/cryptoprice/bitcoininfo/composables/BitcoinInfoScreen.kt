@@ -36,6 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import thierry.cryptoprice.bitcoininfo.BitcoinInfoViewModel.BitcoinInfoUiState.BitcoinInfo
@@ -112,7 +113,7 @@ internal fun BitcoinInfoScreen(
                         .align(Alignment.CenterHorizontally)
                 ) {
                     Text(
-                        text = "Ath:",
+                        text = stringResource(id = R.string.ath),
                     )
 
                     Spacer(modifier = Modifier.width(4.dp))
@@ -133,7 +134,7 @@ internal fun BitcoinInfoScreen(
                         .align(Alignment.CenterHorizontally),
                 ) {
                     Text(
-                        text = "Highest price 24h:",
+                        text = stringResource(id = R.string.highest_price_24h),
                     )
 
                     Spacer(modifier = Modifier.width(4.dp))
@@ -154,7 +155,7 @@ internal fun BitcoinInfoScreen(
                         .align(Alignment.CenterHorizontally),
                 ) {
                     Text(
-                        text = "lowest price 24h:",
+                        text = stringResource(id = R.string.lowest_price_24h),
                     )
 
                     Spacer(modifier = Modifier.width(4.dp))
@@ -189,7 +190,7 @@ internal fun BitcoinInfoScreen(
                                 {
                                     Icon(
                                         imageVector = Icons.Filled.Done,
-                                        contentDescription = "Done icon",
+                                        contentDescription = null,
                                         modifier = Modifier.size(FilterChipDefaults.IconSize)
                                     )
                                 }

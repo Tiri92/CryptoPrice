@@ -2,4 +2,7 @@
     <string name="app_name">CryptoPrice</string>
     <string name="error_occurred">Sorry, an error occurred</string>
     <string name="retry">Retry</string>
+    <string name="ath">Ath:</string>
+    <string name="highest_price_24h">Highest price 24h:</string>
+    <string name="lowest_price_24h">Lowest price 24h:</string>
 </resources>
